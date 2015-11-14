@@ -1,0 +1,22 @@
+
+#source {
+    display: flex;
+    flex-direction: row;
+}
+
+#source > * {
+    display: inline-block;
+    flex-grow: 1;
+    margin: 1em;
+    padding: 0;
+    border: 1px solid green;
+    min-height: 500px;
+}
+
+#crux_source {
+    font-family: monospace;
+}
+
+#js_source {
+    font-family: monospace;
+}
