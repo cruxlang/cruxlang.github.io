@@ -161343,7 +161343,7 @@ function h$$cFx()
   var d = a.d2;
   var e = d.d1;
   var f = h$toStr(c, e, d.d2);
-  b["innerText"] = f;
+  b["textContent"] = f;
   h$r1 = a;
   return h$stack[h$sp];
 };
