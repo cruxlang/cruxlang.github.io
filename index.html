@@ -38,35 +38,33 @@ does not compromise on rock-solid fundamentals.</p>
 to guess what you're trying to say because we don't think your customers should be the ones to tell you that we guessed
 wrong.</p>
 
+<p>Our intent with Crux is to capture</p>
+
 <ul>
-<li>Easy, familiar syntax that doesn't hide surprises</li>
-<li>Hindley-Milner type inference</li>
-<li>Lean, obvious generated code</li>
-<li>Solid asynchronous programming</li>
+<li>the joy and human factors of Python</li>
+<li>the ability to run the same code on the frontend and backend</li>
+<li>the straightforward performance and operational semantics of ML</li>
+<li>the safety under overloading of Haskell</li>
+<li>and the lightweight M:N concurrency of Go or Haskell or Python</li>
 </ul>
 
 <h3>
 <a id="what-does-it-look-like" class="anchor" href="#what-does-it-look-like" aria-hidden="true"><span class="octicon octicon-link"></span></a>What does it look like?</h3>
 
-<p>Current thinking here: <a href="https://github.com/andyfriesen/crux/wiki/Syntax-Strawman">link</a></p>
+<pre><code>fun getFolderContents(folder) {
+    let rv = []
 
-<p>Summary:</p>
+    let contents: Array String = fs.readdirSync(folder)
+    for entry in contents {
+        let absEntry = combine(folder, entry)
+        let stat = fs.lstatSync(absEntry)
+        if stat.isFile() &amp;&amp; (entry->endsWith(".jpeg") || entry->endsWith(".jpg")) {
+            rv->append(entry)
+        }
+    }
 
-<pre><code>data List a {
-    Cons a (List a),
-    Nil
-};
-
-let s = Cons(5, Cons(6, Cons(7, Nil)));
-
-fun len(list) {
-    match list {
-        Nil =&gt; 0;
-        Cons x tail =&gt; 1 + len(tail);
-    };
-};
-
-let _ = print(len(s));
+    return rv
+}
 </code></pre>
 
 <h3>
@@ -119,6 +117,6 @@ let _ = print(len(s));
       </div>
     </div>
 
-  
+
   </body>
 </html>
