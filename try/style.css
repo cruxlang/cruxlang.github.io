@@ -10,7 +10,8 @@
     resize: none;
     font-family: monospace;
     outline: none;
-    background-color: white; }
+    background-color: white;
+    padding: 0.4em; }
   .crux-playground .header {
     flex: 0 0 auto;
     padding: 0 0 12px 0; }
