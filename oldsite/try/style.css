@@ -1,0 +1,33 @@
+.crux-playground {
+  box-sizing: border-box;
+  height: 100vh;
+  margin: 0;
+  padding: 12px;
+  background-color: #dce4da;
+  display: flex;
+  flex-direction: column; }
+  .crux-playground textarea {
+    resize: none;
+    font-family: monospace;
+    outline: none;
+    background-color: white;
+    padding: 0.4em; }
+  .crux-playground .header {
+    flex: 0 0 auto;
+    display: flex;
+    padding: 0 0 12px 0; }
+    .crux-playground .header .run-container {
+      flex: 1 0 auto; }
+    .crux-playground .header .optimize-container {
+      flex: 0 0 auto; }
+  .crux-playground .body {
+    flex: 1 0 auto;
+    display: flex; }
+    .crux-playground .body .source {
+      flex: 1 1 auto;
+      margin-right: 6px; }
+    .crux-playground .body .output {
+      flex: 1 1 auto;
+      margin-left: 6px; }
+    .crux-playground .body .output.has-errors {
+      color: red; }
