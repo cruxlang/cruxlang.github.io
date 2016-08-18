@@ -42,57 +42,187 @@ function _rts_new_exception(name, baseException) {
     return ctor;
 }
 ;
-  var $boolean_True;
-  var $boolean_False;
-  var $boolean_not;
+  var $types_True;
+  var $types_False;
+  var $types_Void;
   (function() {
     var True = true;
     var False = false;
-    function not(b) {
-      var $0;
-      if ((true===b)) {
-        {
-        }
-        $0 = False;
-      }
-      else {
-        if ((false===b)) {
-          {
-          }
-          $0 = True;
-        }
-        else {
-        }
-      }
-      return $0;
-    }
-    $boolean_True = True;
-    $boolean_False = False;
+    var Void = (void 0);
+    $types_True = True;
+    $types_False = False;
+    $types_Void = Void;
+  })();
+  var $js$unsafe_not;
+  var $js$unsafe_eq;
+  var $js$unsafe_neq;
+  var $js$unsafe_lt;
+  var $js$unsafe_lte;
+  var $js$unsafe_gt;
+  var $js$unsafe_gte;
+  (function() {
+    var $0 = function not(b) { return !b; };
+    var not = $0;
+    var $1 = function eq(lhs, rhs) { return lhs === rhs; };
+    var eq = $1;
+    var $2 = function neq(lhs, rhs) { return lhs !== rhs; };
+    var neq = $2;
+    var $3 = function lt(lhs, rhs) { return lhs < rhs; };
+    var lt = $3;
+    var $4 = function lte(lhs, rhs) { return lhs <= rhs; };
+    var lte = $4;
+    var $5 = function gt(lhs, rhs) { return lhs > rhs; };
+    var gt = $5;
+    var $6 = function gte(lhs, rhs) { return lhs >= rhs; };
+    var gte = $6;
+    $js$unsafe_not = not;
+    $js$unsafe_eq = eq;
+    $js$unsafe_neq = neq;
+    $js$unsafe_lt = lt;
+    $js$unsafe_lte = lte;
+    $js$unsafe_gt = gt;
+    $js$unsafe_gte = gte;
+  })();
+  var $boolean_not;
+  (function() {
+    var not = $js$unsafe_not;
     $boolean_not = not;
   })();
   var $cmp_eq;
   var $cmp_neq;
-  var $$Boolean$Eq$$$boolean$$$cmp;
+  var $$Boolean$Eq$$$types$$$cmp;
+  var $cmp_lt;
+  var $cmp_gte;
+  var $cmp_lte;
+  var $cmp_gt;
+  var $cmp_min;
+  var $cmp_max;
+  var $cmp_LessThan;
+  var $cmp_EqualTo;
+  var $cmp_GreaterThan;
+  var $$Ordering$Eq$$$cmp$$$cmp;
+  var $cmp_compare;
   (function() {
     function eq(dict) {
       return (dict).eq;
     }
-    function neq(dict) {
-      return (dict).neq;
+    function neq($cmp$Eq$13) {
+      return (function(lhs, rhs) {
+        var $0 = eq($cmp$Eq$13);
+        var $1 = $0(lhs, rhs);
+        var $2 = $boolean_not($1);
+        return $2;
+      });
     }
-    var $0 = function eq(x, y) { return x === y; };
-    var $1 = function neq(x, y) { return x !== y; };
-    $$Boolean$Eq$$$boolean$$$cmp = {eq:$0, neq:$1};
+    $$Boolean$Eq$$$types$$$cmp = {eq:$js$unsafe_eq};
+    function lt(dict) {
+      return (dict).lt;
+    }
+    function gte($cmp$Ordered$28) {
+      return (function(lhs, rhs) {
+        var $3 = lt($cmp$Ordered$28);
+        var $4 = $3(lhs, rhs);
+        var $5 = $boolean_not($4);
+        return $5;
+      });
+    }
+    function lte($cmp$Eq$42, $cmp$Ordered$42) {
+      return (function(lhs, rhs) {
+        var $6 = lt($cmp$Ordered$42);
+        var $7 = $6(lhs, rhs);
+        var $8 = eq($cmp$Eq$42);
+        var $9 = $8(lhs, rhs);
+        var $10 = ($7||$9);
+        return $10;
+      });
+    }
+    function gt($cmp$Eq$56, $cmp$Ordered$56) {
+      return (function(lhs, rhs) {
+        var $11 = lt($cmp$Ordered$56);
+        var $12 = $11(rhs, lhs);
+        var $13 = neq($cmp$Eq$56);
+        var $14 = $13(lhs, rhs);
+        var $15 = ($12&&$14);
+        return $15;
+      });
+    }
+    function min($cmp$Ordered$62) {
+      return (function(lhs, rhs) {
+        var $16 = lt($cmp$Ordered$62);
+        var $17 = $16(lhs, rhs);
+        var $18;
+        if ($17) {
+          $18 = lhs;
+        }
+        else {
+          $18 = rhs;
+        }
+        return $18;
+      });
+    }
+    function max($cmp$Ordered$74) {
+      return (function(lhs, rhs) {
+        var $19 = lt($cmp$Ordered$74);
+        var $20 = $19(rhs, lhs);
+        var $21;
+        if ($20) {
+          $21 = lhs;
+        }
+        else {
+          $21 = rhs;
+        }
+        return $21;
+      });
+    }
+    var LessThan = "negative-one-todo";
+    var EqualTo = 0;
+    var GreaterThan = 1;
+    $$Ordering$Eq$$$cmp$$$cmp = {eq:$js$unsafe_eq};
+    function compare($cmp$Ordered$100) {
+      return (function(lhs, rhs) {
+        var $22 = lt($cmp$Ordered$100);
+        var $23 = $22(lhs, rhs);
+        var $24;
+        if ($23) {
+          $24 = LessThan;
+        }
+        else {
+          var $25 = lt($cmp$Ordered$100);
+          var $26 = $25(rhs, lhs);
+          var $27;
+          if ($26) {
+            $27 = GreaterThan;
+          }
+          else {
+            $27 = EqualTo;
+          }
+          $24 = $27;
+        }
+        return $24;
+      });
+    }
     $cmp_eq = eq;
     $cmp_neq = neq;
-    $$Boolean$Eq$$$boolean$$$cmp = $$Boolean$Eq$$$boolean$$$cmp;
+    $$Boolean$Eq$$$types$$$cmp = $$Boolean$Eq$$$types$$$cmp;
+    $cmp_lt = lt;
+    $cmp_gte = gte;
+    $cmp_lte = lte;
+    $cmp_gt = gt;
+    $cmp_min = min;
+    $cmp_max = max;
+    $cmp_LessThan = LessThan;
+    $cmp_EqualTo = EqualTo;
+    $cmp_GreaterThan = GreaterThan;
+    $$Ordering$Eq$$$cmp$$$cmp = $$Ordering$Eq$$$cmp$$$cmp;
+    $cmp_compare = compare;
   })();
   var $$Number$Eq$$$number$$$cmp;
+  var $$Number$Ordered$$$number$$$cmp;
   (function() {
-    var $0 = function(x, y) { return x === y; };
-    var $1 = function(x, y) { return x !== y; };
-    $$Number$Eq$$$number$$$cmp = {eq:$0, neq:$1};
+    $$Number$Eq$$$number$$$cmp = {eq:$js$unsafe_eq};
+    $$Number$Ordered$$$number$$$cmp = {lt:$js$unsafe_lt};
     $$Number$Eq$$$number$$$cmp = $$Number$Eq$$$number$$$cmp;
+    $$Number$Ordered$$$number$$$cmp = $$Number$Ordered$$$number$$$cmp;
   })();
   var $length_len;
   (function() {
@@ -109,6 +239,7 @@ function _rts_new_exception(name, baseException) {
   var $array_sliceFrom;
   var $array_sliceTo;
   var $array_slice;
+  var $array_map;
   (function() {
     var $0 = function (len) { return new Array(len); };
     var _unsafe_new = $0;
@@ -125,7 +256,7 @@ function _rts_new_exception(name, baseException) {
       var $5 = ($4).length;
       return $5;
     })};
-    $$Array$Eq$$$array$$$cmp = (function($cmp$Eq$43) {
+    $$Array$Eq$$$array$$$cmp = (function($cmp$Eq$42) {
       return {eq:(function(lhs, rhs) {
         var $6 = $length_len($$Array$HasLength$$$array$$$length);
         var $7 = $6(lhs);
@@ -141,7 +272,7 @@ function _rts_new_exception(name, baseException) {
         var $11 = $10(lhs_length, rhs_length);
         var $12;
         if ($11) {
-          return $boolean_False;
+          return $types_False;
         }
         else {
           $12 = (void 0);
@@ -151,60 +282,56 @@ function _rts_new_exception(name, baseException) {
         }
         while (true)
         {
-          var $13 = (i<lhs_length);
-          var $14 = (!$13);
-          var $15;
-          if ($14) {
+          var $13 = $cmp_lt($$Number$Ordered$$$number$$$cmp);
+          var $14 = $13(i, lhs_length);
+          var $15 = (!$14);
+          var $16;
+          if ($15) {
             break;
           }
           else {
-            $15 = (void 0);
+            $16 = (void 0);
           }
-          var $16 = $cmp_neq($cmp$Eq$43);
-          var $17 = get(lhs, i);
-          var $18 = get(rhs, i);
-          var $19 = $16($17, $18);
-          var $20;
-          if ($19) {
-            return $boolean_False;
+          var $17 = $cmp_neq($cmp$Eq$42);
+          var $18 = get(lhs, i);
+          var $19 = get(rhs, i);
+          var $20 = $17($18, $19);
+          var $21;
+          if ($20) {
+            return $types_False;
           }
           else {
-            $20 = (void 0);
+            $21 = (void 0);
           }
-          var $21 = (i+1);
-          i = $21;
+          var $22 = (i+1);
+          i = $22;
         }
-        return $boolean_True;
-      }), neq:(function(lhs, rhs) {
-        var $22 = $$Array$Eq$$$array$$$cmp($cmp$Eq$43);
-        var $23 = $cmp_eq($22);
-        var $24 = $23(lhs, rhs);
-        var $25 = $boolean_not($24);
-        return $25;
+        return $types_True;
       })};
     });
     function replicate(element, n) {
-      var $26 = _unsafe_new(n);
+      var $23 = _unsafe_new(n);
       {
-        var arr = $26;
+        var arr = $23;
       }
       {
         var i = 0;
       }
       while (true)
       {
-        var $27 = (i<n);
-        var $28 = (!$27);
-        var $29;
-        if ($28) {
+        var $24 = $cmp_lt($$Number$Ordered$$$number$$$cmp);
+        var $25 = $24(i, n);
+        var $26 = (!$25);
+        var $27;
+        if ($26) {
           break;
         }
         else {
-          $29 = (void 0);
+          $27 = (void 0);
         }
-        var $30 = _unsafe_set(arr, i, element);
-        var $31 = (i+1);
-        i = $31;
+        var $28 = _unsafe_set(arr, i, element);
+        var $29 = (i+1);
+        i = $29;
       }
       return arr;
     }
@@ -212,43 +339,49 @@ function _rts_new_exception(name, baseException) {
       {
         var i = 0;
       }
-      var $32 = $length_len($$Array$HasLength$$$array$$$length);
-      var $33 = $32(arr);
+      var $30 = $length_len($$Array$HasLength$$$array$$$length);
+      var $31 = $30(arr);
       {
-        var n = $33;
+        var n = $31;
       }
       while (true)
       {
-        var $34 = (i<n);
-        var $35 = (!$34);
-        var $36;
-        if ($35) {
+        var $32 = $cmp_lt($$Number$Ordered$$$number$$$cmp);
+        var $33 = $32(i, n);
+        var $34 = (!$33);
+        var $35;
+        if ($34) {
           break;
         }
         else {
-          $36 = (void 0);
+          $35 = (void 0);
         }
-        var $37 = _unsafe_get(arr, i);
-        var $38 = f($37);
-        var $39 = (i+1);
-        i = $39;
+        var $36 = _unsafe_get(arr, i);
+        var $37 = f($36);
+        var $38 = (i+1);
+        i = $38;
       }
       return (void 0);
     }
     function sliceFrom(arr, start) {
-      var $40 = arr;
-      var $41 = ($40).slice(start);
-      return $41;
+      var $39 = arr;
+      var $40 = ($39).slice(start);
+      return $40;
     }
     function sliceTo(arr, end) {
-      var $42 = arr;
-      var $43 = ($42).slice(0, end);
-      return $43;
+      var $41 = arr;
+      var $42 = ($41).slice(0, end);
+      return $42;
     }
     function slice(arr, start, end) {
-      var $44 = arr;
-      var $45 = ($44).slice(start, end);
-      return $45;
+      var $43 = arr;
+      var $44 = ($43).slice(start, end);
+      return $44;
+    }
+    function map(array, fn) {
+      var $45 = array;
+      var $46 = ($45).map(fn);
+      return $46;
     }
     $array_get = get;
     $$Array$HasLength$$$array$$$length = $$Array$HasLength$$$array$$$length;
@@ -258,40 +391,7 @@ function _rts_new_exception(name, baseException) {
     $array_sliceFrom = sliceFrom;
     $array_sliceTo = sliceTo;
     $array_slice = slice;
-  })();
-  var $pair_Pair;
-  var $$Pair$Eq$$$pair$$$cmp;
-  (function() {
-    function Pair(a0, a1) {
-      return ["Pair", a0, a1];
-    }
-    $$Pair$Eq$$$pair$$$cmp = (function($cmp$Eq$9, $cmp$Eq$10) {
-      return {eq:(function($_0, $_1) {
-        var a = $_0[1];
-        var b = $_0[2];
-        var c = $_1[1];
-        var d = $_1[2];
-        var $0 = $cmp_eq($cmp$Eq$9);
-        var $1 = $0(a, c);
-        var $2 = $cmp_eq($cmp$Eq$10);
-        var $3 = $2(b, d);
-        var $4 = ($1&&$3);
-        return $4;
-      }), neq:(function($_2, $_3) {
-        var a = $_2[1];
-        var b = $_2[2];
-        var c = $_3[1];
-        var d = $_3[2];
-        var $5 = $cmp_neq($cmp$Eq$9);
-        var $6 = $5(a, c);
-        var $7 = $cmp_neq($cmp$Eq$10);
-        var $8 = $7(b, d);
-        var $9 = ($6||$8);
-        return $9;
-      })};
-    });
-    $pair_Pair = Pair;
-    $$Pair$Eq$$$pair$$$cmp = $$Pair$Eq$$$pair$$$cmp;
+    $array_map = map;
   })();
   var $option_Some;
   var $option_None;
@@ -303,15 +403,15 @@ function _rts_new_exception(name, baseException) {
     var None = ["None"];
     $$Option$Eq$$$option$$$cmp = (function($cmp$Eq$5) {
       return {eq:(function(lhs, rhs) {
-        var $0 = $pair_Pair(lhs, rhs);
+        var $0 = $tuple_Tuple2(lhs, rhs);
         var $1;
-        if (((("Pair"===$0[0])&&("None"===$0[1][0]))&&("None"===$0[2][0]))) {
+        if (((("Tuple2"===$0[0])&&("None"===$0[1][0]))&&("None"===$0[2][0]))) {
           {
           }
-          $1 = $boolean_True;
+          $1 = $types_True;
         }
         else {
-          if (((("Pair"===$0[0])&&("Some"===$0[1][0]))&&("Some"===$0[2][0]))) {
+          if (((("Tuple2"===$0[0])&&("Some"===$0[1][0]))&&("Some"===$0[2][0]))) {
             {
               var x = $0[1][1];
               var y = $0[2][1];
@@ -323,7 +423,7 @@ function _rts_new_exception(name, baseException) {
           else {
             {
             }
-            $1 = $boolean_False;
+            $1 = $types_False;
           }
         }
         return $1;
@@ -353,53 +453,53 @@ function _rts_new_exception(name, baseException) {
   var $string_sliceFrom;
   var $string_trim;
   (function() {
-    var $0 = function eq(x, y) { return x === y; };
-    var $1 = function neq(x, y) { return x !== y; };
-    $$String$Eq$$$string$$$cmp = {eq:$0, neq:$1};
+    $$String$Eq$$$string$$$cmp = {eq:$js$unsafe_eq};
     $$String$HasLength$$$string$$$length = {len:(function(s) {
-      var $2 = s;
-      var $3 = ($2).length;
-      return $3;
+      var $0 = s;
+      var $1 = ($0).length;
+      return $1;
     })};
     function startsWith(haystack, needle) {
-      var $4 = haystack;
+      var $2 = haystack;
       {
-        var h = $4;
+        var h = $2;
       }
-      var $5 = needle;
+      var $3 = needle;
       {
-        var n = $5;
+        var n = $3;
       }
-      var $6 = (n).length;
-      var $7 = (h).length;
-      var $8 = ($6>$7);
-      var $9;
-      if ($8) {
-        return $boolean_False;
+      var $4 = $cmp_gt($$Number$Eq$$$number$$$cmp, $$Number$Ordered$$$number$$$cmp);
+      var $5 = (n).length;
+      var $6 = (h).length;
+      var $7 = $4($5, $6);
+      var $8;
+      if ($7) {
+        return $types_False;
       }
       else {
-        $9 = (void 0);
+        $8 = (void 0);
       }
-      var $10 = $cmp_eq($$Number$Eq$$$number$$$cmp);
-      var $11 = (h).indexOf(n, 0);
-      var $12 = $10($11, 0);
-      return $12;
+      var $9 = $cmp_eq($$Number$Eq$$$number$$$cmp);
+      var $10 = (h).indexOf(needle, 0);
+      var $11 = $9($10, 0);
+      return $11;
     }
     function endsWith(haystack, needle) {
-      var $13 = haystack;
+      var $12 = haystack;
       {
-        var h = $13;
+        var h = $12;
       }
-      var $14 = needle;
+      var $13 = needle;
       {
-        var n = $14;
+        var n = $13;
       }
+      var $14 = $cmp_gt($$Number$Eq$$$number$$$cmp, $$Number$Ordered$$$number$$$cmp);
       var $15 = (n).length;
       var $16 = (h).length;
-      var $17 = ($15>$16);
+      var $17 = $14($15, $16);
       var $18;
       if ($17) {
-        return $boolean_False;
+        return $types_False;
       }
       else {
         $18 = (void 0);
@@ -408,7 +508,7 @@ function _rts_new_exception(name, baseException) {
       var $20 = (h).length;
       var $21 = (n).length;
       var $22 = ($20-$21);
-      var $23 = (h).indexOf(n, $22);
+      var $23 = (h).indexOf(needle, $22);
       var $24 = (0-1);
       var $25 = $19($23, $24);
       return $25;
@@ -477,18 +577,19 @@ function _rts_new_exception(name, baseException) {
       }
       while (true)
       {
-        var $9 = (i<n);
-        var $10 = (!$9);
-        var $11;
-        if ($10) {
+        var $9 = $cmp_lt($$Number$Ordered$$$number$$$cmp);
+        var $10 = $9(i, n);
+        var $11 = (!$10);
+        var $12;
+        if ($11) {
           break;
         }
         else {
-          $11 = (void 0);
+          $12 = (void 0);
         }
-        var $12 = _unsafe_set(arr, i, element);
-        var $13 = (i+1);
-        i = $13;
+        var $13 = _unsafe_set(arr, i, element);
+        var $14 = (i+1);
+        i = $14;
       }
       return arr;
     }
@@ -496,53 +597,54 @@ function _rts_new_exception(name, baseException) {
       {
         var i = 0;
       }
-      var $14 = $length_len($$MutableArray$HasLength$$$mutarray$$$length);
-      var $15 = $14(arr);
+      var $15 = $length_len($$MutableArray$HasLength$$$mutarray$$$length);
+      var $16 = $15(arr);
       {
-        var n = $15;
+        var n = $16;
       }
       while (true)
       {
-        var $16 = (i<n);
-        var $17 = (!$16);
-        var $18;
-        if ($17) {
+        var $17 = $cmp_lt($$Number$Ordered$$$number$$$cmp);
+        var $18 = $17(i, n);
+        var $19 = (!$18);
+        var $20;
+        if ($19) {
           break;
         }
         else {
-          $18 = (void 0);
+          $20 = (void 0);
         }
-        var $19 = _unsafe_get(arr, i);
-        var $20 = f($19);
-        var $21 = (i+1);
-        i = $21;
+        var $21 = _unsafe_get(arr, i);
+        var $22 = f($21);
+        var $23 = (i+1);
+        i = $23;
       }
       return (void 0);
     }
     function sliceFrom(arr, start) {
-      var $22 = arr;
-      var $23 = ($22).slice(start);
-      return $23;
-    }
-    function sliceTo(arr, end) {
       var $24 = arr;
-      var $25 = ($24).slice(0, end);
+      var $25 = ($24).slice(start);
       return $25;
     }
-    function slice(arr, start, end) {
+    function sliceTo(arr, end) {
       var $26 = arr;
-      var $27 = ($26).slice(start, end);
+      var $27 = ($26).slice(0, end);
       return $27;
     }
-    function freeze(arr) {
+    function slice(arr, start, end) {
       var $28 = arr;
-      var $29 = ($28).slice();
+      var $29 = ($28).slice(start, end);
       return $29;
     }
-    function sort(arr) {
+    function freeze(arr) {
       var $30 = arr;
-      var $31 = ($30).sort();
+      var $31 = ($30).slice();
       return $31;
+    }
+    function sort(arr) {
+      var $32 = arr;
+      var $33 = ($32).sort();
+      return $33;
     }
     $mutarray_append = append;
     $mutarray_get = get;
@@ -554,6 +656,43 @@ function _rts_new_exception(name, baseException) {
     $mutarray_slice = slice;
     $mutarray_freeze = freeze;
     $mutarray_sort = sort;
+  })();
+  var $tuple_Tuple2;
+  var $tuple_Tuple3;
+  var $tuple_Tuple4;
+  var $tuple_Tuple5;
+  var $tuple_Tuple6;
+  var $tuple_Tuple7;
+  var $tuple_Tuple8;
+  (function() {
+    function Tuple2(a0, a1) {
+      return ["Tuple2", a0, a1];
+    }
+    function Tuple3(a0, a1, a2) {
+      return ["Tuple3", a0, a1, a2];
+    }
+    function Tuple4(a0, a1, a2, a3) {
+      return ["Tuple4", a0, a1, a2, a3];
+    }
+    function Tuple5(a0, a1, a2, a3, a4) {
+      return ["Tuple5", a0, a1, a2, a3, a4];
+    }
+    function Tuple6(a0, a1, a2, a3, a4, a5) {
+      return ["Tuple6", a0, a1, a2, a3, a4, a5];
+    }
+    function Tuple7(a0, a1, a2, a3, a4, a5, a6) {
+      return ["Tuple7", a0, a1, a2, a3, a4, a5, a6];
+    }
+    function Tuple8(a0, a1, a2, a3, a4, a5, a6, a7) {
+      return ["Tuple8", a0, a1, a2, a3, a4, a5, a6, a7];
+    }
+    $tuple_Tuple2 = Tuple2;
+    $tuple_Tuple3 = Tuple3;
+    $tuple_Tuple4 = Tuple4;
+    $tuple_Tuple5 = Tuple5;
+    $tuple_Tuple6 = Tuple6;
+    $tuple_Tuple7 = Tuple7;
+    $tuple_Tuple8 = Tuple8;
   })();
   var $builtin_print;
   var $builtin_toString;
@@ -579,12 +718,12 @@ function _rts_new_exception(name, baseException) {
     function TimerId(a0) {
       return ["TimerId", a0];
     }
-    function unTimerId($_4) {
-      var t = $_4[1];
+    function unTimerId($_0) {
+      var t = $_0[1];
       return t;
     }
     var COMPILE_DELAY = 1000;
-    function as_bool(a) {
+    function unsafe_as_bool(a) {
       var $0 = function (x) { return !!x; };
       {
         var to_bool = $0;
@@ -622,7 +761,7 @@ function _rts_new_exception(name, baseException) {
         var rawRes = $14;
       }
       var $15 = (rawRes).error;
-      var $16 = as_bool($15);
+      var $16 = unsafe_as_bool($15);
       var $17;
       if ($16) {
         var $18 = (rawRes).error;
@@ -660,256 +799,249 @@ function _rts_new_exception(name, baseException) {
     function LastCompile(a0, a1) {
       return ["LastCompile", a0, a1];
     }
-    $$LastCompile$Eq$$$main$$$cmp = {eq:(function($_5, $_6) {
-      var a = $_5[1];
-      var b = $_5[2];
-      var c = $_6[1];
-      var d = $_6[2];
+    $$LastCompile$Eq$$$main$$$cmp = {eq:(function($_1, $_2) {
+      var a = $_1[1];
+      var b = $_1[2];
+      var c = $_2[1];
+      var d = $_2[2];
       var $27 = $cmp_eq($$String$Eq$$$string$$$cmp);
       var $28 = $27(a, c);
-      var $29 = $cmp_eq($$Boolean$Eq$$$boolean$$$cmp);
+      var $29 = $cmp_eq($$Boolean$Eq$$$types$$$cmp);
       var $30 = $29(b, d);
       var $31 = ($28&&$30);
       return $31;
-    }), neq:(function(x, y) {
-      var $32 = $cmp_eq($$LastCompile$Eq$$$main$$$cmp);
-      var $33 = $32(x, y);
-      var $34 = $boolean_not($33);
-      return $34;
     })};
     function Compiler(a0) {
       return ["Compiler", a0];
     }
     function newCompiler(onresult) {
-      var $35 = Compiler({state:Idle, lastCompile:$option_None, onresult:onresult});
-      return $35;
+      var $32 = Compiler({state:Idle, lastCompile:$option_None, onresult:onresult});
+      return $32;
     }
-    function compile($_7, source, optimize) {
-      var this$ = $_7[1];
-      var $36 = (this$).state;
-      var $37;
-      if (("Idle"===$36[0])) {
+    function compile($_3, source, optimize) {
+      var this$ = $_3[1];
+      var $33 = (this$).state;
+      var $34;
+      if (("Idle"===$33[0])) {
         {
         }
-        $37 = (void 0);
+        $34 = (void 0);
       }
       else {
-        if (("Waiting"===$36[0])) {
+        if (("Waiting"===$33[0])) {
           {
-            var tid = $36[1];
+            var tid = $33[1];
           }
-          var $38 = clearTimeout(tid);
-          $37 = $38;
+          var $35 = clearTimeout(tid);
+          $34 = $35;
         }
         else {
-          if (("Optimizing"===$36[0])) {
+          if (("Optimizing"===$33[0])) {
             {
-              var xhr = $36[1];
+              var xhr = $33[1];
             }
-            var $39 = (xhr).abort();
-            $37 = $39;
+            var $36 = (xhr).abort();
+            $34 = $36;
           }
           else {
           }
         }
       }
       (this$).state = Idle;
-      var $40 = $$Option$Eq$$$option$$$cmp($$LastCompile$Eq$$$main$$$cmp);
-      var $41 = $cmp_eq($40);
-      var $42 = (this$).lastCompile;
-      var $43 = LastCompile(source, optimize);
-      var $44 = $option_Some($43);
-      var $45 = $41($42, $44);
-      var $46;
-      if ($45) {
+      var $37 = $$Option$Eq$$$option$$$cmp($$LastCompile$Eq$$$main$$$cmp);
+      var $38 = $cmp_eq($37);
+      var $39 = (this$).lastCompile;
+      var $40 = LastCompile(source, optimize);
+      var $41 = $option_Some($40);
+      var $42 = $38($39, $41);
+      var $43;
+      if ($42) {
         return (void 0);
       }
       else {
-        $46 = (void 0);
+        $43 = (void 0);
       }
-      var $78 = setTimeout((function() {
-        var $47 = compileCrux(source);
-        var $48;
-        if (("Err"===$47[0])) {
+      var $75 = setTimeout((function() {
+        var $44 = compileCrux(source);
+        var $45;
+        if (("Err"===$44[0])) {
           {
-            var error = $47[1];
+            var error = $44[1];
           }
           (this$).state = Idle;
-          var $49 = LastCompile(source, optimize);
-          var $50 = $option_Some($49);
-          (this$).lastCompile = $50;
-          var $51 = ("Compile error:\n"+error);
-          var $52 = $result_Err($51);
-          var $53 = (this$).onresult($52);
+          var $46 = LastCompile(source, optimize);
+          var $47 = $option_Some($46);
+          (this$).lastCompile = $47;
+          var $48 = ("Compile error:\n"+error);
+          var $49 = $result_Err($48);
+          var $50 = (this$).onresult($49);
           return (void 0);
         }
         else {
-          if (("Ok"===$47[0])) {
+          if (("Ok"===$44[0])) {
             {
-              var res = $47[1];
+              var res = $44[1];
             }
-            var $54 = $boolean_not(optimize);
-            var $55;
-            if ($54) {
+            var $51 = $boolean_not(optimize);
+            var $52;
+            if ($51) {
               (this$).state = Idle;
-              var $56 = LastCompile(source, optimize);
-              var $57 = $option_Some($56);
-              (this$).lastCompile = $57;
-              var $58 = $result_Ok(res);
-              var $59 = (this$).onresult($58);
+              var $53 = LastCompile(source, optimize);
+              var $54 = $option_Some($53);
+              (this$).lastCompile = $54;
+              var $55 = $result_Ok(res);
+              var $56 = (this$).onresult($55);
               return (void 0);
             }
             else {
-              $55 = res;
+              $52 = res;
             }
-            $48 = $55;
+            $45 = $52;
           }
           else {
           }
         }
         {
-          var result = $48;
+          var result = $45;
         }
-        var $60 = newXmlHttpRequest();
+        var $57 = newXmlHttpRequest();
         {
-          var xhr = $60;
+          var xhr = $57;
         }
-        var $61 = (xhr).open("POST", "https://crux-closure-service.herokuapp.com/compile");
-        var $62 = (xhr).setRequestHeader("content-type", "application/json");
+        var $58 = (xhr).open("POST", "https://crux-closure-service.herokuapp.com/compile");
+        var $59 = (xhr).setRequestHeader("content-type", "application/json");
         (xhr).timeout = 60000;
-        var $63 = toJson({source:result});
-        var $64 = (xhr).send($63);
-        var $65 = Optimizing(xhr);
-        (this$).state = $65;
+        var $60 = toJson({source:result});
+        var $61 = (xhr).send($60);
+        var $62 = Optimizing(xhr);
+        (this$).state = $62;
         (xhr).onload = (function() {
-          var $66 = (xhr).response;
-          var $67 = parseJson($66);
+          var $63 = (xhr).response;
+          var $64 = parseJson($63);
           {
-            var result2 = $67;
+            var result2 = $64;
           }
           (this$).state = Idle;
-          var $68 = LastCompile(source, optimize);
-          var $69 = $option_Some($68);
-          (this$).lastCompile = $69;
-          var $70 = (result2).source;
-          var $71 = $result_Ok($70);
-          var $72 = (this$).onresult($71);
-          return $72;
+          var $65 = LastCompile(source, optimize);
+          var $66 = $option_Some($65);
+          (this$).lastCompile = $66;
+          var $67 = (result2).source;
+          var $68 = $result_Ok($67);
+          var $69 = (this$).onresult($68);
+          return $69;
         });
         (xhr).onerror = (function(e) {
           (this$).lastCompile = $option_None;
-          var $73 = ("Network error:\n"+e);
-          var $74 = $result_Err($73);
-          var $75 = (this$).onresult($74);
-          return $75;
+          var $70 = ("Network error:\n"+e);
+          var $71 = $result_Err($70);
+          var $72 = (this$).onresult($71);
+          return $72;
         });
         (xhr).ontimeout = (function() {
           (this$).lastCompile = $option_None;
-          var $76 = $result_Err("Network timeout");
-          var $77 = (this$).onresult($76);
-          return $77;
+          var $73 = $result_Err("Network timeout");
+          var $74 = (this$).onresult($73);
+          return $74;
         });
         return (void 0);
       }), COMPILE_DELAY);
-      var $79 = Waiting($78);
-      (this$).state = $79;
+      var $76 = Waiting($75);
+      (this$).state = $76;
       return (void 0);
     }
     function main() {
-      var $80 = querySelector(".crux-playground .source");
+      var $77 = querySelector(".crux-playground .source");
       {
-        var sourceTextArea = $80;
+        var sourceTextArea = $77;
       }
-      var $81 = querySelector(".crux-playground .output");
+      var $78 = querySelector(".crux-playground .output");
       {
-        var outputTextArea = $81;
+        var outputTextArea = $78;
       }
-      var $82 = querySelector(".crux-playground .optimize");
+      var $79 = querySelector(".crux-playground .optimize");
       {
-        var optimizeCheckbox = $82;
+        var optimizeCheckbox = $79;
       }
-      var $83 = querySelector(".crux-playground .run");
+      var $80 = querySelector(".crux-playground .run");
       {
-        var runButton = $83;
+        var runButton = $80;
       }
       {
         var loadExampleSource = (function() {
-          var $84 = getElementById("initial_example");
-          var $85 = ($84).text;
+          var $81 = getElementById("initial_example");
+          var $82 = ($81).text;
           {
-            var source = $85;
+            var source = $82;
           }
-          var $86 = $string_trim(source);
-          source = $86;
+          var $83 = $string_trim(source);
+          source = $83;
           (sourceTextArea).value = source;
           return (void 0);
         });
       }
-      var $92 = newCompiler((function(result) {
-        var $87;
+      var $89 = newCompiler((function(result) {
+        var $84;
         if (("Ok"===result[0])) {
           {
             var res = result[1];
           }
-          var $88 = (outputTextArea).classList;
-          var $89 = ($88).remove("has-errors");
+          var $85 = (outputTextArea).classList;
+          var $86 = ($85).remove("has-errors");
           (outputTextArea).value = res;
-          $87 = (void 0);
+          $84 = (void 0);
         }
         else {
           if (("Err"===result[0])) {
             {
               var err = result[1];
             }
-            var $90 = (outputTextArea).classList;
-            var $91 = ($90).add("has-errors");
+            var $87 = (outputTextArea).classList;
+            var $88 = ($87).add("has-errors");
             (outputTextArea).value = err;
-            $87 = (void 0);
+            $84 = (void 0);
           }
           else {
           }
         }
-        return $87;
+        return $84;
       }));
       {
-        var compiler = $92;
+        var compiler = $89;
       }
       {
         var recompile = (function() {
-          var $93 = (sourceTextArea).value;
+          var $90 = (sourceTextArea).value;
           {
-            var content = $93;
+            var content = $90;
           }
-          var $94 = (optimizeCheckbox).checked;
+          var $91 = (optimizeCheckbox).checked;
           {
-            var optimize = $94;
+            var optimize = $91;
           }
-          var $95 = compile(compiler, content, optimize);
-          return $95;
+          var $92 = compile(compiler, content, optimize);
+          return $92;
         });
       }
       {
         var registerCompileListener = (function() {
-          var $96 = (sourceTextArea).addEventListener("input", recompile);
-          var $97 = (optimizeCheckbox).addEventListener("change", recompile);
-          return $97;
+          var $93 = (sourceTextArea).addEventListener("input", recompile);
+          var $94 = (optimizeCheckbox).addEventListener("change", recompile);
+          return $94;
         });
       }
-      var $98 = loadExampleSource();
-      var $99 = registerCompileListener();
-      var $100 = recompile();
-      (sourceTextArea).disabled = $boolean_False;
-      var $101 = (sourceTextArea).setSelectionRange(0, 0);
-      var $102 = (sourceTextArea).focus();
-      var $104 = (runButton).addEventListener("click", (function() {
-        var $103 = $builtin_print("run button temporarily disabled");
-        return $103;
+      var $95 = loadExampleSource();
+      var $96 = registerCompileListener();
+      var $97 = recompile();
+      (sourceTextArea).disabled = $types_False;
+      var $98 = (sourceTextArea).setSelectionRange(0, 0);
+      var $99 = (sourceTextArea).focus();
+      var $101 = (runButton).addEventListener("click", (function() {
+        var $100 = $builtin_print("run button temporarily disabled");
+        return $100;
       }));
-      return $104;
+      return $101;
     }
-    var $105 = main();
+    var $102 = main();
     $$LastCompile$Eq$$$main$$$cmp = $$LastCompile$Eq$$$main$$$cmp;
-  })();
-  (function() {
   })();
 })();

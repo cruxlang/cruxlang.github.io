@@ -23,9 +23,9 @@
 data Node {}
 
 type Document = {
-    createTextNode: fun(String) -> Node,
+    createTextNode: (String) -> Node,
     body: {
-        insertBefore: fun(Node, Node) -> Node,
+        insertBefore: (Node, Node) -> Node,
         firstChild: Node
     },
 }
