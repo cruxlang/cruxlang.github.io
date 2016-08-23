@@ -851,393 +851,83 @@ function _rts_new_exception(name, baseException) {
     }
     $crux_compile = compile;
   })();
-  var $dom$worker_new;
-  var $dom$worker_postMessage;
-  var $dom$worker_setHandler;
+  var $dom$workerself_close;
+  var $dom$workerself_importScripts;
+  var $dom$workerself_setHandler;
+  var $dom$workerself_postMessage;
   (function() {
-    var $0 = function newWorker(str) { return new Worker(str) };
-    var new$ = $0;
-    function postMessage(worker, message) {
-      var $1 = worker;
-      var $2 = ($1).postMessage(message);
+    function close() {
+      var $0 = (self).close();
+      return $0;
+    }
+    function importScripts(scripts) {
+      var $1 = (self).importScripts;
+      var $2 = ($1).apply($js_Null, scripts);
       return $2;
     }
     var $3 = function(e) { return e.data; };
     var getData = $3;
-    function setHandler(worker, handler) {
-      var $4 = worker;
-      ($4).onmessage = (function(event) {
-        var $5 = getData(event);
-        var $6 = handler($5);
+    function setHandler(handler) {
+      (self).onmessage = (function(event) {
+        var $4 = getData(event);
+        var $5 = handler($4);
+        return $5;
+      });
+      return (void 0);
+    }
+    function postMessage($js$ToValue$54) {
+      return (function(value) {
+        var $6 = (self).postMessage(value);
         return $6;
       });
-      return (void 0);
     }
-    $dom$worker_new = new$;
-    $dom$worker_postMessage = postMessage;
-    $dom$worker_setHandler = setHandler;
+    $dom$workerself_close = close;
+    $dom$workerself_importScripts = importScripts;
+    $dom$workerself_setHandler = setHandler;
+    $dom$workerself_postMessage = postMessage;
   })();
-  var $$LastCompile$Eq$$$main$$$cmp;
   (function() {
-    function TimerId(a0) {
-      return ["TimerId", a0];
-    }
-    function unTimerId($_0) {
-      var t = $_0[1];
-      return t;
-    }
-    var COMPILE_DELAY = 1000;
-    function querySelector(sel) {
-      var $0 = document;
-      var $1 = ($0).querySelector(sel);
-      return $1;
-    }
-    function getElementById(id) {
-      var $2 = document;
-      var $3 = ($2).getElementById(id);
-      return $3;
-    }
-    function setTimeout(f, delay) {
-      var $4 = window;
-      var $5 = ($4).setTimeout(f, delay);
-      var $6 = TimerId($5);
-      return $6;
-    }
-    function clearTimeout(tid) {
-      var $7 = window;
-      var $8 = unTimerId(tid);
-      var $9 = ($7).clearTimeout($8);
-      return $9;
-    }
-    function newXmlHttpRequest() {
-      var $10 = new XMLHttpRequest;
+    function main() {
+      var $0 = $dom$workerself_importScripts(["crux.js"]);
+      var $10 = $dom$workerself_setHandler((function(message) {
+        var $1 = message;
+        {
+          var compileRequest = $1;
+        }
+        var $2 = (compileRequest).source;
+        var $3 = $crux_compile($2);
+        var $4;
+        if (("Err"===$3[0])) {
+          {
+            var err = $3[1];
+          }
+          var $5 = (compileRequest).compileID;
+          $4 = {compileID:$5, success:$types_False, result:err};
+        }
+        else {
+          if (("Ok"===$3[0])) {
+            {
+              var result = $3[1];
+            }
+            var $6 = (compileRequest).compileID;
+            $4 = {compileID:$6, success:$types_True, result:result};
+          }
+          else {
+          }
+        }
+        {
+          var result = $4;
+        }
+        var $7 = result;
+        {
+          var postedResult = $7;
+        }
+        var $8 = $dom$workerself_postMessage($$Value$ToValue$$$js$$$js);
+        var $9 = $8(postedResult);
+        return $9;
+      }));
       return $10;
     }
-    function toJson(o) {
-      var $11 = JSON.stringify;
-      var $12 = $11(o);
-      return $12;
-    }
-    function parseJson(s) {
-      var $13 = JSON.parse;
-      var $14 = $13(s);
-      return $14;
-    }
-    var Idle = ["Idle"];
-    function Waiting(a0) {
-      return ["Waiting", a0];
-    }
-    function Compiling(a0) {
-      return ["Compiling", a0];
-    }
-    function Optimizing(a0) {
-      return ["Optimizing", a0];
-    }
-    function LastCompile(a0, a1) {
-      return ["LastCompile", a0, a1];
-    }
-    $$LastCompile$Eq$$$main$$$cmp = {eq:(function($_1, $_2) {
-      var a = $_1[1];
-      var b = $_1[2];
-      var c = $_2[1];
-      var d = $_2[2];
-      var $15 = $cmp_eq($$String$Eq$$$string$$$cmp);
-      var $16 = $15(a, c);
-      var $17 = $cmp_eq($$Boolean$Eq$$$types$$$cmp);
-      var $18 = $17(b, d);
-      var $19 = ($16&&$18);
-      return $19;
-    })};
-    function Compiler(a0) {
-      return ["Compiler", a0];
-    }
-    function compile($_3, source, optimize) {
-      var this$ = $_3[1];
-      var $20 = (this$).state;
-      var $21;
-      if (("Idle"===$20[0])) {
-        {
-        }
-        $21 = (void 0);
-      }
-      else {
-        if (("Waiting"===$20[0])) {
-          {
-            var tid = $20[1];
-          }
-          var $22 = clearTimeout(tid);
-          $21 = $22;
-        }
-        else {
-          if (("Compiling"===$20[0])) {
-            {
-            }
-            $21 = (void 0);
-          }
-          else {
-            if (("Optimizing"===$20[0])) {
-              {
-                var xhr = $20[1];
-              }
-              var $23 = (xhr).abort();
-              $21 = $23;
-            }
-            else {
-            }
-          }
-        }
-      }
-      (this$).state = Idle;
-      var $24 = $$Option$Eq$$$option$$$cmp($$LastCompile$Eq$$$main$$$cmp);
-      var $25 = $cmp_eq($24);
-      var $26 = (this$).lastCompile;
-      var $27 = LastCompile(source, optimize);
-      var $28 = $option_Some($27);
-      var $29 = $25($26, $28);
-      var $30;
-      if ($29) {
-        return (void 0);
-      }
-      else {
-        $30 = (void 0);
-      }
-      var $38 = setTimeout((function() {
-        var $31 = (this$).nextCompileID;
-        {
-          var compileID = $31;
-        }
-        var $32 = (this$).nextCompileID;
-        var $33 = ($32+1);
-        (this$).nextCompileID = $33;
-        var $34 = (this$).worker;
-        var $35 = {compileID:compileID, source:source};
-        var $36 = $dom$worker_postMessage($34, $35);
-        var $37 = Compiling({compileID:compileID, source:source, optimize:optimize});
-        (this$).state = $37;
-        return (void 0);
-      }), COMPILE_DELAY);
-      var $39 = Waiting($38);
-      (this$).state = $39;
-      return (void 0);
-    }
-    function receiveCompilationResponse($_4, response) {
-      var this$ = $_4[1];
-      var $40 = (this$).state;
-      var $41;
-      if (("Compiling"===$40[0])) {
-        {
-          var settings = $40[1];
-        }
-        var $42 = $cmp_neq($$Number$Eq$$$number$$$cmp);
-        var $43 = (settings).compileID;
-        var $44 = (response).compileID;
-        var $45 = $42($43, $44);
-        var $46;
-        if ($45) {
-          return (void 0);
-        }
-        else {
-          $46 = (void 0);
-        }
-        var $47 = (settings).source;
-        var $48 = (settings).optimize;
-        var $49 = $tuple_Tuple2($47, $48);
-        $41 = $49;
-      }
-      else {
-        {
-        }
-        return (void 0);
-      }
-      {
-        var source = $41[1];
-        var optimize = $41[2];
-      }
-      var $50 = (response).success;
-      var $51;
-      if ($50) {
-        var $52 = $boolean_not(optimize);
-        var $53;
-        if ($52) {
-          (this$).state = Idle;
-          var $54 = LastCompile(source, optimize);
-          var $55 = $option_Some($54);
-          (this$).lastCompile = $55;
-          var $56 = (response).result;
-          var $57 = $result_Ok($56);
-          var $58 = (this$).onresult($57);
-          return (void 0);
-        }
-        else {
-          var $59 = (response).result;
-          $53 = $59;
-        }
-        $51 = $53;
-      }
-      else {
-        (this$).state = Idle;
-        var $60 = LastCompile(source, optimize);
-        var $61 = $option_Some($60);
-        (this$).lastCompile = $61;
-        var $62 = (response).result;
-        var $63 = ("Compile error:\n"+$62);
-        var $64 = $result_Err($63);
-        var $65 = (this$).onresult($64);
-        return (void 0);
-      }
-      {
-        var result = $51;
-      }
-      var $66 = newXmlHttpRequest();
-      {
-        var xhr = $66;
-      }
-      var $67 = (xhr).open("POST", "https://crux-closure-service.herokuapp.com/compile");
-      var $68 = (xhr).setRequestHeader("content-type", "application/json");
-      (xhr).timeout = 60000;
-      var $69 = toJson({source:result});
-      var $70 = (xhr).send($69);
-      var $71 = Optimizing(xhr);
-      (this$).state = $71;
-      (xhr).onload = (function() {
-        var $72 = (xhr).response;
-        var $73 = parseJson($72);
-        {
-          var result2 = $73;
-        }
-        (this$).state = Idle;
-        var $74 = LastCompile(source, optimize);
-        var $75 = $option_Some($74);
-        (this$).lastCompile = $75;
-        var $76 = (result2).source;
-        var $77 = $result_Ok($76);
-        var $78 = (this$).onresult($77);
-        return $78;
-      });
-      (xhr).onerror = (function(e) {
-        (this$).lastCompile = $option_None;
-        var $79 = ("Network error:\n"+e);
-        var $80 = $result_Err($79);
-        var $81 = (this$).onresult($80);
-        return $81;
-      });
-      (xhr).ontimeout = (function() {
-        (this$).lastCompile = $option_None;
-        var $82 = $result_Err("Network timeout");
-        var $83 = (this$).onresult($82);
-        return $83;
-      });
-      return (void 0);
-    }
-    function newCompiler(onresult) {
-      var $84 = $dom$worker_new("compiler-worker.js");
-      {
-        var compilerThread = $84;
-      }
-      var $85 = Compiler({state:Idle, lastCompile:$option_None, onresult:onresult, nextCompileID:0, worker:compilerThread});
-      {
-        var compiler = $85;
-      }
-      var $88 = $dom$worker_setHandler(compilerThread, (function(response) {
-        var $86 = response;
-        var $87 = receiveCompilationResponse(compiler, $86);
-        return $87;
-      }));
-      return compiler;
-    }
-    function main() {
-      var $89 = querySelector(".crux-playground .source");
-      {
-        var sourceTextArea = $89;
-      }
-      var $90 = querySelector(".crux-playground .output");
-      {
-        var outputTextArea = $90;
-      }
-      var $91 = querySelector(".crux-playground .optimize");
-      {
-        var optimizeCheckbox = $91;
-      }
-      var $92 = querySelector(".crux-playground .run");
-      {
-        var runButton = $92;
-      }
-      {
-        var loadExampleSource = (function() {
-          var $93 = getElementById("initial_example");
-          var $94 = ($93).text;
-          {
-            var source = $94;
-          }
-          var $95 = $string_trim(source);
-          source = $95;
-          (sourceTextArea).value = source;
-          return (void 0);
-        });
-      }
-      var $101 = newCompiler((function(result) {
-        var $96;
-        if (("Ok"===result[0])) {
-          {
-            var res = result[1];
-          }
-          var $97 = (outputTextArea).classList;
-          var $98 = ($97).remove("has-errors");
-          (outputTextArea).value = res;
-          $96 = (void 0);
-        }
-        else {
-          if (("Err"===result[0])) {
-            {
-              var err = result[1];
-            }
-            var $99 = (outputTextArea).classList;
-            var $100 = ($99).add("has-errors");
-            (outputTextArea).value = err;
-            $96 = (void 0);
-          }
-          else {
-          }
-        }
-        return $96;
-      }));
-      {
-        var compiler = $101;
-      }
-      {
-        var recompile = (function() {
-          var $102 = (sourceTextArea).value;
-          {
-            var content = $102;
-          }
-          var $103 = (optimizeCheckbox).checked;
-          {
-            var optimize = $103;
-          }
-          var $104 = compile(compiler, content, optimize);
-          return $104;
-        });
-      }
-      {
-        var registerCompileListener = (function() {
-          var $105 = (sourceTextArea).addEventListener("input", recompile);
-          var $106 = (optimizeCheckbox).addEventListener("change", recompile);
-          return $106;
-        });
-      }
-      var $107 = loadExampleSource();
-      var $108 = registerCompileListener();
-      var $109 = recompile();
-      (sourceTextArea).disabled = $types_False;
-      var $110 = (sourceTextArea).setSelectionRange(0, 0);
-      var $111 = (sourceTextArea).focus();
-      var $113 = (runButton).addEventListener("click", (function() {
-        var $112 = $builtin_print("run button temporarily disabled");
-        return $112;
-      }));
-      return $113;
-    }
-    var $114 = main();
-    $$LastCompile$Eq$$$main$$$cmp = $$LastCompile$Eq$$$main$$$cmp;
+    var $11 = main();
   })();
 })();
