@@ -1,8 +1,8 @@
 ---
 layout: page
-title: About the Authors
+title: Authors
 permalink: /authors/
-order: 1
+order: 2
 ---
 
 ## Chad
