@@ -7,11 +7,45 @@ layout: default
   <div class="wrapper">
 
     <div class="welcome">
+      <!--
       <p>
-        Crux is a principled, productive programming language that provides
-        familiar syntax but does not compromise on rock-solid fundamentals.
+        Crux is a principled, productive programming language with familiar,
+        lightweight syntax, but without compromising on safety.
       </p>
-      <h2>Big Ideas</h2>
+      -->
+      <p>
+        Crux is a statically-typed language, compiling to JavaScript,
+        with an emphasis on familiarity, productivity, and soundness.
+      </p>
+      {% highlight crux %}
+fun getFolderContents(folder) {
+  let rv = mutable []
+
+  let contents: [String] = fs.readdirSync(folder)
+  for entry in contents {
+    let absEntry = combine(folder, entry)
+    let stat = fs.lstatSync(absEntry)
+    if stat.isFile() && (entry->endsWith(".jpeg") || entry->endsWith(".jpg")) {
+      rv->append(entry)
+    }
+  }
+
+  return rv
+}
+      {% endhighlight %}
+    </div>
+
+    <div class="learn-more">
+      <div class="embedded-twitter">
+        <a class="twitter-timeline"
+           href="https://twitter.com/cruxlang"
+           data-chrome="nofooter"
+           data-tweet-limit="3"
+        >Tweets by cruxlang</a>
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+
+      <h2>Main Ideas</h2>
       <p>
         Crux is all about small ideas that smoothly fit together without
         clumsy seams or weird corner cases.  Crux is 100% type safe, but
@@ -51,22 +85,23 @@ layout: default
       </p>
     </div>
 
-  <h1 class="page-heading">Posts</h1>
+    <div class="news">
+      <h2>News</h2>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <ul class="post-list">
+      {% for post in site.posts %}
+        <li>
+          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title | escape }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-   </div>
+          <h2>
+            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title | escape }}</a>
+          </h2>
+        </li>
+      {% endfor %}
+      </ul>
+    
+      <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+    </div>
+  </div>
 
 </div>
