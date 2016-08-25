@@ -29,7 +29,7 @@ fun build() {
   result->append("hello") // now we know result contains strings
   return result
 }
-// build has type () => mutable [String]
+// build is a function of type () => mutable [String]
 ```
 
 ## Immutable By Default
@@ -54,3 +54,13 @@ fun maximum(container) {
 
 `maximum` has no type annotations, but the compiler determines it can work
 on any Iterable containing Bounded, Ordered elements.
+
+## Direct Integration with JavaScript
+
+Crux is designed to interoperate smoothly with JavaScript.  Both mutable
+and immutable arrays are JavaScript arrays under the hood.  Booleans, strings,
+and numbers are all what you'd expect.  Record types are simply objects underneath.
+
+This makes it straightforward to reuse existing libraries in both the browser
+and Node.js.
+

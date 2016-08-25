@@ -10,14 +10,9 @@ layout: default
       <p class="warning">
         Warning: Crux is currently in preview status.  While it's possible to write programs
         in it today, there are many rough edges, and not every feature described
-        here is complete.  You can help by sharing your feedback and first impressions!
+        here is complete.  You can help by sharing your thoughts - click the feedback
+        button below!
       </p>
-      <!--
-      <p>
-        Crux is a principled, productive programming language with familiar,
-        lightweight syntax, but without compromising on safety.
-      </p>
-      -->
       <p>
         Crux is a statically-typed language, compiling to JavaScript,
         with an emphasis on familiarity, productivity, and soundness.
@@ -110,3 +105,15 @@ fun getFolderContents(folder) {
   </div>
 
 </div>
+
+<script type="text/javascript">
+    window.doorbellOptions = {
+        appKey: '4Sc4ACVRx0xu0vWCEkhwQEy4M6jt0PYN7lyrj8YspUtlKtFSxFWHOvimCtUmFJnH'
+    };
+    (function(w, d, t) {
+        var hasLoaded = false;
+        function l() { if (hasLoaded) { return; } hasLoaded = true; window.doorbellOptions.windowLoaded = true; var g = d.createElement(t);g.id = 'doorbellScript';g.type = 'text/javascript';g.async = true;g.src = 'https://embed.doorbell.io/button/4311?t='+(new Date().getTime());(d.getElementsByTagName('head')[0]||d.getElementsByTagName('body')[0]).appendChild(g); }
+        if (w.attachEvent) { w.attachEvent('onload', l); } else if (w.addEventListener) { w.addEventListener('load', l, false); } else { l(); }
+        if (d.readyState == 'complete') { l(); }
+    }(window, document, 'script'));
+</script>
