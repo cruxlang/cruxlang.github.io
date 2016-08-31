@@ -4,7 +4,8 @@ title: Status
 permalink: /status/
 ---
 
-Crux is a work in progress.  Roughly, here is its current state:
+Crux is a work in progress.  Roughly, its current state is as follows.
+You can also look at the [GitHub issues](https://github.com/cruxlang/crux/issues/).
 
 ## Working
 
