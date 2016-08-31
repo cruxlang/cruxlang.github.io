@@ -12,26 +12,16 @@ catch all type errors.
 Therefore, it is sometimes necessary to subvert the type system.  Crux provides
 several clearly-marked features for doing so.
 
-`_unsafe_coerce` allows converting
+`_unsafe_coerce` allows interpreting a value of any type as a value of any other
+type, something like a cast in C.
 
-.  In a nutshell, soundness means that if the type checker passes, the
-program has no violations of the type system.  This is not a property that, for
-example, C++ or TypeScript have (see TypeScript's
-[a note on soundness](https://www.typescriptlang.org/docs/handbook/type-compatibility.html)).
+`_unsafe_js` allows evaluating an arbitrary string of JavaScript as any type,
+which is useful for defining primitive functions on top of JavaScript.
 
-Assuming no [explicitly unsafe constructs](/unsafe) are used, the program will never exhibit
-errors like 'undefined is not a function' or 'cannot read property of null', and you'll
-never accidentally add a number to a string.
 
-How does soundness related to gradual typing?  Gradual typing is an active area of
-programming language research where, instead of trying to prove the absence of type
-errors, you're trying to take a large existing codebase (usually in a language like
-Python, JavaScript, or Erlang), and, over time, opt into increasingly strict
-type checks.  We're thrilled to see progress in this area.  However, gradual typing
-doesn't carry the same kind of guarantees that soundness does when refactoring code.
+TODO: should I talk about this?
 
-TODO: link Dialyzer, MyPy, Flow, TypeScript
+These unsafe mechanisms are used to implement higher-level, type-safe APIs.
 
-Crux takes a different approach: full bidirectional type inference.  Because Crux
-never requires the use of type annotations, it feels like a dynamic language while
-still providing type safety.
+Every so often someone will argue "If your libraries are built on unsafe functions,
+then they can't be safe!"  TODO: gently describe why that's a fallacy
