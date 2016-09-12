@@ -48,40 +48,34 @@ fun getFolderContents(folder) {
       <h2>Main Ideas</h2>
       <p>
         Crux is all about small ideas that smoothly fit together without
-        clumsy seams or weird corner cases.  Crux is 100% type safe, but
+        clumsy seams or corner cases.  Crux is 100% type safe, but
         thanks to bidirectional type inference, you almost never have to
         spell out the names of your types.
       </p>
       <p>
         Crux code integrates directly with existing JavaScript --
         you can build Crux libraries for publishing on npm or use existing
-        JavaScript libraries.
+        JavaScript libraries.  Unlike other strongly-typed languages that
+        compile to JavaScript (e.g. Scala.js, GHCJS, Emscripten), Crux's
+        concepts map directly to ES6.
       </p>
       <p>
-        Crux is sound [TODO: link to soundness page] - never worry about
+        (The following claim is yet to be proven, haha!)  
+        In fact, Crux code is often faster than equivalent JavaScript because
+        methods in Crux are statically dispatched rather than dynamically
+        looked up from an object.  This means you can write your code naturally
+        and know that the optimizer will inline short methods.
+      </p>
+      <p>
+        Crux is <a href="/soundness">sound</a> - never worry about
         missing properties or "undefined is not a function" again.
       </p>
       <p>
-        Crux's syntax is designed to be familiar to anyone coming from
-        JavaScript or Python.
-      </p>
-      <p>
-        Unlike other strongly-typed languages that compile to JavaScript,
-        like Scala.js or GHCJS or Emscripten, Crux maps directly to ES6 semantics.  This
-        means that code written in Crux is as fast as JavaScript or TypeScript.
-      </p>
-      <p>
-        In fact, Crux code is often faster [benchmarks needed] than similar
-        JavaScript, because methods in Crux are statically-dispatched rather
-        than dynamically looked up from an object.  This means you can write
-        your code naturally and know that the optimizer will inline short methods.
-      </p>
-      <p>
-        Crux has tuples.
-      </p>
-      <p>
-        Iteration uses exactly the same syntax no matter the data structure:
-        arrays, immutable arrays, sets, maps, slices, ranges.
+        Unlike TypeScript, Crux allows custom data types to use the same
+        syntax and operators as native data types, such as tuples, 64-bit integers,
+        sets, maps, slices, and ranges.  The length of a value is always accessed
+        with `len(x)` and iteration across any data structure uses the same
+        for loop structure.
       </p>
     </div>
 
