@@ -12,11 +12,11 @@ he built the async programming model for Python, the static asset delivery syste
 of [embind](https://kripken.github.io/emscripten-site/docs/porting/connecting_cpp_and_javascript/embind.html), a C++ binding
 layer for Emscripten.  Chad is now at Dropbox working on web and native application prototypes.
 
-[https://chadaustin.me]
+[https://chadaustin.me](https://chadaustin.me)
 
 ## Andy
 
 Andy is a lead at IMVU.  He led IMVU's adoption of Haskell and built much of the key infrastructure, including
 the server-side renderer.  Andy kick-started the Crux project with the initial parser and type checker.
 
-[http://andyfriesen.com/]
+[http://andyfriesen.com/](http://andyfriesen.com)
