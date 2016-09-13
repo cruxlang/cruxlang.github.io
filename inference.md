@@ -20,11 +20,11 @@ fun makeWeirdArray() {
 }
 ```
 
-When the `array` variable is initialized, we know it's a `MutableArray`, but we don't know the
-the type of the elements yet.  Then we append an element, and now we know the concrete element
+When the `array` variable is initialized, we know it's a `mutable []`, but we don't know the
+type of the elements yet.  When we append an element, we learn the concrete element
 type -- String in this case.
 
-If the function's entire type annotation were written out, it would look like:
+If `makeWeirdArray`'s type annotation were spelled out, it would look like:
 
 ```crux
 fun makeWeirdArray(): mutable [String] {
