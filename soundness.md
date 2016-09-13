@@ -17,11 +17,22 @@ How does soundness related to gradual typing?  Gradual typing is an active area 
 programming language research where, instead of trying to prove the absence of type
 errors, you're trying to take a large existing codebase (usually in a language like
 Python, JavaScript, or Erlang), and, over time, opt into increasingly strict
-type checks.  We're thrilled to see progress in this area.  However, gradual typing
-doesn't carry the same kind of guarantees that soundness does when refactoring code.
+type checks.  It's a different goal: rather than trying to prove the absence of type
+errors, gradual typing systems try uncover the existence of possible type errors
+(but admit that they won't uncover every possible type error).  We're thrilled to see
+progress in this area.  [TypeScript](https://www.typescriptlang.org/), [mypy](http://mypy-lang.org/),
+[Dialyzer](http://erlang.org/doc/man/dialyzer.html), and [Flow](https://flowtype.org) are
+gradual typing systems worth looking at.
 
-TODO: link Dialyzer, MyPy, Flow, TypeScript
+Why does Crux aim for soundness instead of gradual typing?  In a rich, sound type system like, for
+example, Haskell's, programmers can accurately refactor large codebases with utmost confidence:
+leaning on the compiler (for a large class of code changes) is guaranteed to result in a correct
+program.  This benefit alone is worth striving for.  Additionally, when a type system provides
+guarantees, the optimizer has more opportunities to improve the generated code.  (This, by the way,
+is how a lazy, "boxy" language like Haskell can be made fast at all.)
 
-Crux takes a different approach: [full bidirectional type inference](/inference).  Because Crux
-never requires the use of type annotations, it feels like a dynamic language while
-still providing type safety.
+And even though Crux's type system is sound, it is not onerous to use.  Because Crux has 
+[full bidirectional type inference](/inference), it never _requires_ the use of type annotations,
+and thus feels like a dynamic language while still providing type safety.  Of course, if you want
+to use type annotations on function parameters, return values, or local variables for your
+own sanity or for documentation purposes, then by all means.  :)
