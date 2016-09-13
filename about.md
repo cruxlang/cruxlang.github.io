@@ -5,9 +5,37 @@ permalink: /about/
 order: 3
 ---
 
-History.  What it's aiming at.  Design principles.
+# History
 
-??? Is this page needed?
+The Crux project started when Chad and Andy led the
+[adoption of Haskell at IMVU](https://chadaustin.me/2016/06/the-story-of-haskell-at-imvu/).
+The ideas in Haskell are amazing, and they make us wish every language could express ideas
+so accurately and concisely.  (They say learning Haskell makes you a better programmer,
+and that's definitely true, but it also makes you sad.  Little else is as good.)
+
+Unfortunately, a lot of engineers just couldn't get over the syntax and unfamiliarity.
+Chad has a background in usability and empathizes: Haskell is not that pleasant in many
+ways.
+
+Then Chad left IMVU and went to Dropbox, fresh off the static typing high, and found a
+significant amount of resistance to even the idea of static typing.  Eventually he traced
+this back to peoples' experience with C++ and Java, where static typing is associated with
+OOP and mandatory, redundant, and pervasive type annotations.
+
+Of course, static typing doesn't have to be painful -- we have evidence from the ML family
+of languages -- and there's no reason we couldn't have a language that's as pleasant to write
+as JavaScript, Python, or Go with many of the type safety benefits of Haskell.
+
+And that's how Crux came to be.
+
+# Goals
+
+* Crux is designed to achieve very tight code generation: pay only for what you use, and the
+  generated code should be as small as or smaller than the equivalent hand-written code.
+* Provide rich data structures out of the box: immutable and mutable arrays, sets, and maps.
+* Adopt syntactic conventions from JavaScript (or other languages) whenever possible.
+* Natural, familiar syntax but without any contortions -- everything is an expression.
+* Direct FFI to JavaScript - benefit from the huge ecosystem of existing JavaScript libraries.
 
 # Examples
 
@@ -64,3 +92,14 @@ and numbers are all what you'd expect.  Record types are simply objects undernea
 This makes it straightforward to reuse existing libraries in both the browser
 and Node.js.
 
+## Everything is an Expression
+
+```crux
+fun showMenu(context) {
+  let color = match context {
+    Sidebar => SidebarMenuColor
+    RightClick => RightClickMenuColor
+  }
+  showMenuWithColor(color)
+}
+```
