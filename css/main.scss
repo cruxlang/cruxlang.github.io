@@ -50,6 +50,11 @@ $on-laptop:        800px;
 
 // slackmein
 
+.slack-link {
+  display: inline-block;
+  width: 57px;
+}
+
 iframe.__slackin {
   position: relative;
   top: 4.5px;
