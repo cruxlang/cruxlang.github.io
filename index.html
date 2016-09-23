@@ -14,10 +14,10 @@ layout: default
         button below!  Or <a href="https://cruxlang-slackin.herokuapp.com/">join the community on Slack</a>.
       </p>
       <p>
-        Crux is a statically-typed language, that compiles to JavaScript,
-        with an emphasis on familiarity, productivity, and <a href="/soundness">soundness</a>.
+        Crux is statically-typed, compiles to JavaScript, and emphasizes
+        familiarity, productivity, and <a href="/soundness">soundness</a>.
       </p>
-      {% highlight crux %}
+{% highlight crux %}
 fun getFolderContents(folder) {
   let rv = mutable []
 
@@ -32,8 +32,10 @@ fun getFolderContents(folder) {
 
   return rv
 }
-      {% endhighlight %}
+{% endhighlight %}
     </div>
+
+    <hr class="main-separator" />
 
     <div class="learn-more">
       <div class="embedded-twitter">
@@ -46,30 +48,41 @@ fun getFolderContents(folder) {
       </div>
 
       <h2>Main Ideas</h2>
+
+      <h3>Bidirectional Type Inference</h3>
       <p>
-        Crux is all about small ideas that smoothly fit together without
-        clumsy seams or corner cases.  Crux is 100% type safe, but
-        thanks to <a href="/inference">bidirectional type inference</a>,
-        you almost never have to spell out the names of your types.
+        Unlike other statically typed languages, Crux's
+        <a href="/inference">type inference algorithm</a> means the
+        programmer is never forced to write type annotations on functions or
+        variables.
+      </p>
+
+{% highlight crux %}
+let output = mutable []
+output->append("hello world")
+// output is inferred to be a MutableArray<String>
+{% endhighlight %}
+
+      <h3>Integration with npm</h3>
+      <p>
+        Crux code integrates directly with existing JavaScript -- either export
+        your code as an npm package or write a program that leverages existing
+        JavaScript libraries.
       </p>
       <p>
-        Crux code integrates directly with existing JavaScript --
-        you can build Crux libraries for publishing on npm or use existing
-        JavaScript libraries.  Unlike other strongly-typed languages that
-        compile to JavaScript (e.g. Scala.js, GHCJS, Emscripten), Crux's
-        concepts map directly to ES6.
+        Unlike other compile-to-JavaScript languages (e.g. Scala.js, GHCJS,
+        Emscripten), Crux's concepts map directly to ES6, so the generated code
+        is clean, debuggable, and has predictable <a href="/performance">performance</a>.
       </p>
-      <p>
-        (The following claim is yet to be proven, haha!)  
-        In fact, Crux code is often faster than equivalent JavaScript because
-        methods in Crux are statically dispatched rather than dynamically
-        looked up from an object.  This means you can write your code naturally
-        and know that the optimizer will inline short methods.
-      </p>
+
+      <h3>Soundness</h3>
       <p>
         Crux is <a href="/soundness">sound</a> - never worry about
         missing properties or "undefined is not a function" again.
+        This is especially helpful when <a href="/refactoring">refactoring</a>.
       </p>
+
+      <h3>Rich Data Types</h3>
       <p>
         Unlike TypeScript, Crux allows custom data types to use the same
         syntax and operators as native data types, such as tuples, 64-bit integers,
@@ -78,6 +91,8 @@ fun getFolderContents(folder) {
         for loop structure.
       </p>
     </div>
+
+    <hr class="main-separator" />
 
     <div class="news">
       <h2>News</h2>
