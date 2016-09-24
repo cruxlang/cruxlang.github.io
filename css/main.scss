@@ -61,5 +61,9 @@ iframe.__slackin {
 }
 
 hr.main-separator {
+  height: 0;
   margin-bottom: 15px;
+
+  border: none;
+  border-bottom: 1px solid $grey-color-light;
 }

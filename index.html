@@ -63,12 +63,29 @@ output->append("hello world")
 // output is inferred to be a MutableArray<String>
 {% endhighlight %}
 
-      <h3>Integration with npm</h3>
+      <h3>Integration with npm and JavaScript</h3>
       <p>
-        Crux code integrates directly with existing JavaScript -- either export
-        your code as an npm package or write a program that leverages existing
-        JavaScript libraries.
+        Crux code integrates directly with existing JavaScript -- import existing
+        JS libraries or publish your package on npm.
       </p>
+{% highlight crux %}
+declare require<any>: String => any
+let fs = require("fs")
+
+type Stat = {
+  length: Number,
+  mtime: Number,
+  ctime: Number,
+}
+
+// jsffi verifies all of the types used
+// in the function are natural JS data
+export jsffi fun statFiles(
+  files: [String]
+): Dict<Stat> {
+  // ...
+}
+{% endhighlight %}
       <p>
         Unlike other compile-to-JavaScript languages (e.g. Scala.js, GHCJS,
         Emscripten), Crux's concepts map directly to ES6, so the generated code
@@ -79,16 +96,23 @@ output->append("hello world")
       <p>
         Crux is <a href="/soundness">sound</a> - never worry about
         missing properties or "undefined is not a function" again.
-        This is especially helpful when <a href="/refactoring">refactoring</a>.
       </p>
 
       <h3>Rich Data Types</h3>
       <p>
         Unlike TypeScript, Crux allows custom data types to use the same
-        syntax and operators as native data types, such as tuples, 64-bit integers,
-        sets, maps, slices, and ranges.  The length of a value is always accessed
-        with `len(x)` and iteration across any data structure uses the same
-        for loop structure.
+        syntax and operators as native data types.
+
+{% highlight crux %}
+fun bigmad(x: Int64, y: Int64, z: Int64) {
+  return x * y + z
+}
+let (r1, r2) = returnsATuple()
+{% endhighlight %}
+
+        Collections are also consistent. The length of any collection is `len(c)`
+        and iteration across any iterable (set, map, slice, range) uses the same
+        for loop syntax.
       </p>
     </div>
 
