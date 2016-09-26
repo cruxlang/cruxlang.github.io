@@ -71,3 +71,13 @@ hr.main-separator {
 .learn-more h3 {
   font-style: italic;
 }
+
+@include media-query($on-palm) {
+  .slack-link {
+    display: none;
+  }
+
+  .embedded-twitter {
+    display: none;
+  }
+}
