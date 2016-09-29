@@ -7,23 +7,20 @@ layout: default
   <div class="wrapper">
 
     <div class="welcome">
-      <!-- Lightweight, sound static typing for the life of your code. -->
-      <h1>Confidently write code for JavaScript environments</h1>
-      <p>
-          As JavaScript development has grown from tiny hacks on static webpages
-          into large-scale projects, some of the community has started to
-          (re-)learn the benefits of strongly-typed languages. Crux aims to go
-          further than recent efforts in this area (e.g. TypeScript) by
-          delivering <a href="/soundness">soundness</a> while remaining 
-          familiar and productive.
-      </p>
       <p class="warning">
         Warning: Crux is currently in <a href="/status">preview status</a>.  While it's possible to write programs
         with it today, there are many rough edges, and not every feature described
         here is complete.  You can help by sharing your thoughts - click the feedback
         button below!  Or <a href="https://cruxlang-slackin.herokuapp.com/">join the community on Slack</a>.
       </p>
-      <h2>A taste of Crux syntax</h2>
+      <p>
+        Crux is statically-typed, compiles to JavaScript, and emphasizes
+        familiarity, productivity, and <a href="/soundness">soundness</a>.
+      </p>
+      <p>
+        Crux is designed to be as lightweight in small projects as it is
+        reliable and maintainable in large projects.
+      </p>
 {% highlight crux %}
 fun getFolderContents(folder) {
   let rv = mutable []
