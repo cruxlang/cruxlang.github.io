@@ -13,6 +13,7 @@ layout: default
         here is complete.  You can help by sharing your thoughts - click the feedback
         button below!  Or <a href="https://cruxlang-slackin.herokuapp.com/">join the community on Slack</a>.
       </p>
+      <div class="spacer"></div>
       <p>
         Crux is statically-typed, compiles to JavaScript, and emphasizes
         familiarity, productivity, and <a href="/soundness">soundness</a>.
@@ -21,6 +22,7 @@ layout: default
         Crux is designed to be as lightweight in small projects as it is
         reliable and maintainable in large projects.
       </p>
+      <div class="spacer"></div>
 {% highlight crux %}
 fun getFolderContents(folder) {
   let rv = mutable []
@@ -51,7 +53,7 @@ fun getFolderContents(folder) {
         <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
       </div>
 
-      <h2>Main Ideas</h2>
+      <h2>What's Special?</h2>
 
       <h3>Bidirectional Type Inference</h3>
       <p>
@@ -104,20 +106,25 @@ export jsffi fun statFiles(
 
       <h3>Rich Data Types</h3>
       <p>
-        Unlike TypeScript, Crux allows custom data types to use the same
+        Unlike TypeScript, Crux allows non-native data types to use the same
         syntax and operators as native data types.
+      </p>
 
 {% highlight crux %}
 fun bigmad(x: Int64, y: Int64, z: Int64) {
   return x * y + z
 }
-let (r1, r2) = returnsATuple()
 {% endhighlight %}
 
+      <p>
         Collections are also consistent. The length of any collection is `len(c)`
         and iteration across any iterable (set, map, slice, range) uses the same
         for loop syntax.
       </p>
+{% highlight crux %}
+for (index, value) in array->enumerate() { ... }
+for (key, value) in dict->enumerate() { ... }
+{% endhighlight %}
     </div>
 
     <hr class="main-separator" />

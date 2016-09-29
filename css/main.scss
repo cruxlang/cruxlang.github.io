@@ -70,7 +70,8 @@ iframe.__slackin {
 
 hr.main-separator {
   height: 0;
-  margin-bottom: 15px;
+  margin-top: 40px;
+  margin-bottom: 30px;
 
   border: none;
   border-bottom: 1px solid $grey-color-light;
@@ -90,3 +91,10 @@ hr.main-separator {
   }
 }
 
+.home .spacer {
+  height: 1em;
+}
+
+.learn-more h3:not(:first-of-type) {
+  margin-top: 2em;
+}
