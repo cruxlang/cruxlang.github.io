@@ -69,7 +69,7 @@ are convenient when desired.
 
 ```crux
 fun maximum(container) {
-  // maxBound is the minimum value for any Bounded type
+  // minBound is the minimum value for any Bounded type
   let mutable current = minBound
   for element in container {
     if element > current {
