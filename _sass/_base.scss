@@ -131,17 +131,18 @@ pre,
 code {
     font-size: 15px;
     border: 1px solid $code-border-color;
-    border-radius: $border-radius;
     background-color: $code-background-color;
 }
 
 code {
     padding: 1px 5px;
+    border-radius: 3px;
 }
 
 pre {
     padding: 8px 12px;
     overflow-x: auto;
+    border-radius: $border-radius;
 
     > code {
         border: 0;
