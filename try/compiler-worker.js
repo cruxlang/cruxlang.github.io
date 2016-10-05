@@ -566,6 +566,7 @@ function _rts_new_exception(name, baseException) {
   var $mutarray_slice;
   var $mutarray_freeze;
   var $mutarray_sort;
+  var $mutarray_filter;
   (function() {
     var $0 = function (len) { return new Array(len); };
     var _unsafe_new = $0;
@@ -666,6 +667,11 @@ function _rts_new_exception(name, baseException) {
       var $33 = ($32).sort();
       return $33;
     }
+    function filter(arr, pred) {
+      var $34 = arr;
+      var $35 = ($34).filter(pred);
+      return $35;
+    }
     $mutarray_append = append;
     $mutarray_get = get;
     $$MutableArray$HasLength$$$mutarray$$$length = $$MutableArray$HasLength$$$mutarray$$$length;
@@ -676,6 +682,7 @@ function _rts_new_exception(name, baseException) {
     $mutarray_slice = slice;
     $mutarray_freeze = freeze;
     $mutarray_sort = sort;
+    $mutarray_filter = filter;
   })();
   var $tuple_Tuple2;
   var $tuple_Tuple3;
@@ -875,7 +882,7 @@ function _rts_new_exception(name, baseException) {
       });
       return (void 0);
     }
-    function postMessage($js$ToValue$54) {
+    function postMessage($js$ToValue$55) {
       return (function(value) {
         var $6 = (self).postMessage(value);
         return $6;
@@ -929,5 +936,6 @@ function _rts_new_exception(name, baseException) {
       return $10;
     }
     var $11 = main();
+    var $12 = main();
   })();
 })();
