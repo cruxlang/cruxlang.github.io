@@ -466,6 +466,7 @@ function _rts_new_exception(name, baseException) {
     $result_Err = Err;
   })();
   var $$String$Eq$$$string$$$cmp;
+  var $$String$Ordered$$$string$$$cmp;
   var $$String$HasLength$$$string$$$length;
   var $string_startsWith;
   var $string_endsWith;
@@ -474,6 +475,7 @@ function _rts_new_exception(name, baseException) {
   var $string_trim;
   (function() {
     $$String$Eq$$$string$$$cmp = {eq:$js$unsafe_eq};
+    $$String$Ordered$$$string$$$cmp = {lt:$js$unsafe_lt};
     $$String$HasLength$$$string$$$length = {len:(function(s) {
       var $0 = s;
       var $1 = ($0).length;
@@ -549,6 +551,7 @@ function _rts_new_exception(name, baseException) {
       return $31;
     }
     $$String$Eq$$$string$$$cmp = $$String$Eq$$$string$$$cmp;
+    $$String$Ordered$$$string$$$cmp = $$String$Ordered$$$string$$$cmp;
     $$String$HasLength$$$string$$$length = $$String$HasLength$$$string$$$length;
     $string_startsWith = startsWith;
     $string_endsWith = endsWith;
@@ -565,6 +568,7 @@ function _rts_new_exception(name, baseException) {
   var $mutarray_sliceTo;
   var $mutarray_slice;
   var $mutarray_freeze;
+  var $mutarray_unsafeFreeze;
   var $mutarray_sort;
   var $mutarray_filter;
   (function() {
@@ -662,15 +666,19 @@ function _rts_new_exception(name, baseException) {
       var $31 = ($30).slice();
       return $31;
     }
-    function sort(arr) {
+    function unsafeFreeze(arr) {
       var $32 = arr;
-      var $33 = ($32).sort();
-      return $33;
+      return $32;
+    }
+    function sort(arr) {
+      var $33 = arr;
+      var $34 = ($33).sort();
+      return $34;
     }
     function filter(arr, pred) {
-      var $34 = arr;
-      var $35 = ($34).filter(pred);
-      return $35;
+      var $35 = arr;
+      var $36 = ($35).filter(pred);
+      return $36;
     }
     $mutarray_append = append;
     $mutarray_get = get;
@@ -681,6 +689,7 @@ function _rts_new_exception(name, baseException) {
     $mutarray_sliceTo = sliceTo;
     $mutarray_slice = slice;
     $mutarray_freeze = freeze;
+    $mutarray_unsafeFreeze = unsafeFreeze;
     $mutarray_sort = sort;
     $mutarray_filter = filter;
   })();
@@ -691,6 +700,8 @@ function _rts_new_exception(name, baseException) {
   var $tuple_Tuple6;
   var $tuple_Tuple7;
   var $tuple_Tuple8;
+  var $$Tuple2$Eq$$$tuple$$$cmp;
+  var $$Tuple2$Ordered$$$tuple$$$cmp;
   (function() {
     function Tuple2(a0, a1) {
       return ["Tuple2", a0, a1];
@@ -713,6 +724,49 @@ function _rts_new_exception(name, baseException) {
     function Tuple8(a0, a1, a2, a3, a4, a5, a6, a7) {
       return ["Tuple8", a0, a1, a2, a3, a4, a5, a6, a7];
     }
+    $$Tuple2$Eq$$$tuple$$$cmp = (function($cmp$Eq$79, $cmp$Eq$80) {
+      return {eq:(function($_0, $_1) {
+        var a1 = $_0[1];
+        var a2 = $_0[2];
+        var b1 = $_1[1];
+        var b2 = $_1[2];
+        var $0 = $cmp_eq($cmp$Eq$79);
+        var $1 = $0(a1, b1);
+        var $2 = $cmp_eq($cmp$Eq$80);
+        var $3 = $2(a2, b2);
+        var $4 = ($1&&$3);
+        return $4;
+      })};
+    });
+    $$Tuple2$Ordered$$$tuple$$$cmp = (function($cmp$Ordered$101, $cmp$Ordered$102) {
+      return {lt:(function($_2, $_3) {
+        var a1 = $_2[1];
+        var a2 = $_2[2];
+        var b1 = $_3[1];
+        var b2 = $_3[2];
+        var $5 = $cmp_lt($cmp$Ordered$101);
+        var $6 = $5(a1, b1);
+        var $7;
+        if ($6) {
+          $7 = $types_True;
+        }
+        else {
+          var $8 = $cmp_lt($cmp$Ordered$101);
+          var $9 = $8(b1, a1);
+          var $10;
+          if ($9) {
+            $10 = $types_False;
+          }
+          else {
+            var $11 = $cmp_lt($cmp$Ordered$102);
+            var $12 = $11(a2, b2);
+            $10 = $12;
+          }
+          $7 = $10;
+        }
+        return $7;
+      })};
+    });
     $tuple_Tuple2 = Tuple2;
     $tuple_Tuple3 = Tuple3;
     $tuple_Tuple4 = Tuple4;
@@ -720,12 +774,15 @@ function _rts_new_exception(name, baseException) {
     $tuple_Tuple6 = Tuple6;
     $tuple_Tuple7 = Tuple7;
     $tuple_Tuple8 = Tuple8;
+    $$Tuple2$Eq$$$tuple$$$cmp = $$Tuple2$Eq$$$tuple$$$cmp;
+    $$Tuple2$Ordered$$$tuple$$$cmp = $$Tuple2$Ordered$$$tuple$$$cmp;
   })();
   var $builtin_replicate;
   var $builtin_each;
   var $builtin_print;
   var $builtin_toString;
   var $builtin_emptyArray;
+  var $builtin_sorted;
   (function() {
     var replicate = $array_replicate;
     var each = $array_each;
@@ -740,11 +797,41 @@ function _rts_new_exception(name, baseException) {
       var $3 = [];
       return $3;
     }
+    function sorted($cmp$Ordered$37) {
+      return (function(arr) {
+        var $4 = arr;
+        var $5 = ($4).slice();
+        var $13 = ($5).sort((function(lhs, rhs) {
+          var $6 = $cmp_lt($cmp$Ordered$37);
+          var $7 = $6(lhs, rhs);
+          var $8;
+          if ($7) {
+            var $9 = (0-1);
+            $8 = $9;
+          }
+          else {
+            var $10 = $cmp_lt($cmp$Ordered$37);
+            var $11 = $10(rhs, lhs);
+            var $12;
+            if ($11) {
+              $12 = 1;
+            }
+            else {
+              $12 = 0;
+            }
+            $8 = $12;
+          }
+          return $8;
+        }));
+        return $13;
+      });
+    }
     $builtin_replicate = replicate;
     $builtin_each = each;
     $builtin_print = print;
     $builtin_toString = toString;
     $builtin_emptyArray = emptyArray;
+    $builtin_sorted = sorted;
   })();
   var $js_Null;
   var $js_Undefined;
@@ -889,8 +976,8 @@ function _rts_new_exception(name, baseException) {
     function TimerId(a0) {
       return ["TimerId", a0];
     }
-    function unTimerId($_0) {
-      var t = $_0[1];
+    function unTimerId($_4) {
+      var t = $_4[1];
       return t;
     }
     var COMPILE_DELAY = 1000;
@@ -943,11 +1030,11 @@ function _rts_new_exception(name, baseException) {
     function LastCompile(a0, a1) {
       return ["LastCompile", a0, a1];
     }
-    $$LastCompile$Eq$$$main$$$cmp = {eq:(function($_1, $_2) {
-      var a = $_1[1];
-      var b = $_1[2];
-      var c = $_2[1];
-      var d = $_2[2];
+    $$LastCompile$Eq$$$main$$$cmp = {eq:(function($_5, $_6) {
+      var a = $_5[1];
+      var b = $_5[2];
+      var c = $_6[1];
+      var d = $_6[2];
       var $15 = $cmp_eq($$String$Eq$$$string$$$cmp);
       var $16 = $15(a, c);
       var $17 = $cmp_eq($$Boolean$Eq$$$types$$$cmp);
@@ -958,8 +1045,8 @@ function _rts_new_exception(name, baseException) {
     function Compiler(a0) {
       return ["Compiler", a0];
     }
-    function compile($_3, source, optimize) {
-      var this$ = $_3[1];
+    function compile($_7, source, optimize) {
+      var this$ = $_7[1];
       var $20 = (this$).state;
       var $21;
       if (("Idle"===$20[0])) {
@@ -1027,8 +1114,8 @@ function _rts_new_exception(name, baseException) {
       (this$).state = $39;
       return (void 0);
     }
-    function receiveCompilationResponse($_4, response) {
-      var this$ = $_4[1];
+    function receiveCompilationResponse($_8, response) {
+      var this$ = $_8[1];
       var $40 = (this$).state;
       var $41;
       if (("Compiling"===$40[0])) {
