@@ -850,16 +850,24 @@ function _rts_new_exception(name, baseException) {
   var $$Number$ToValue$$$number$$$js;
   var $$Boolean$ToValue$$$types$$$js;
   var $$Value$ToValue$$$js$$$js;
+  var $$Void$Transferable$$$types$$$js;
+  var $$Boolean$Transferable$$$types$$$js;
+  var $$String$Transferable$$$string$$$js;
+  var $$Number$Transferable$$$number$$$js;
+  var $$Array$Transferable$$$array$$$js;
+  var $$Value$Transferable$$$js$$$js;
+  var $$fieldMap$Transferable$$js;
+  var $$record$Transferable$$js;
   (function() {
     var Null = null;
     var Undefined = (void 0);
     function fromValue(dict) {
       return (dict).fromValue;
     }
-    var checkAndCast = (function($cmp$Eq$19) {
+    var checkAndCast = (function($cmp$Eq$20) {
       return (function(typeString) {
         return (function(value) {
-          var $0 = $cmp_eq($cmp$Eq$19);
+          var $0 = $cmp_eq($cmp$Eq$20);
           var $1 = $js$unsafe_typeof(value);
           var $2 = $0($1, typeString);
           var $3;
@@ -903,6 +911,29 @@ function _rts_new_exception(name, baseException) {
     $$Value$ToValue$$$js$$$js = {toValue:(function(value) {
       return value;
     })};
+    $$Void$Transferable$$$types$$$js = {};
+    $$Boolean$Transferable$$$types$$$js = {};
+    $$String$Transferable$$$string$$$js = {};
+    $$Number$Transferable$$$number$$$js = {};
+    $$Array$Transferable$$$array$$$js = (function($js$Transferable$73) {
+      return {};
+    });
+    $$Value$Transferable$$$js$$$js = {};
+    function requireTransferable($js$Transferable$79) {
+      return (function($_6) {
+        return (void 0);
+      });
+    }
+    $$fieldMap$Transferable$$js = (function($js$Transferable$90) {
+      return (function(fieldValue) {
+        var $15 = requireTransferable($js$Transferable$90);
+        var $16 = $15(fieldValue);
+        return $16;
+      });
+    });
+    $$record$Transferable$$js = (function(fieldMap) {
+      return {};
+    });
     $js_Null = Null;
     $js_Undefined = Undefined;
     $js_fromValue = fromValue;
@@ -915,6 +946,14 @@ function _rts_new_exception(name, baseException) {
     $$Number$ToValue$$$number$$$js = $$Number$ToValue$$$number$$$js;
     $$Boolean$ToValue$$$types$$$js = $$Boolean$ToValue$$$types$$$js;
     $$Value$ToValue$$$js$$$js = $$Value$ToValue$$$js$$$js;
+    $$Void$Transferable$$$types$$$js = $$Void$Transferable$$$types$$$js;
+    $$Boolean$Transferable$$$types$$$js = $$Boolean$Transferable$$$types$$$js;
+    $$String$Transferable$$$string$$$js = $$String$Transferable$$$string$$$js;
+    $$Number$Transferable$$$number$$$js = $$Number$Transferable$$$number$$$js;
+    $$Array$Transferable$$$array$$$js = $$Array$Transferable$$$array$$$js;
+    $$Value$Transferable$$$js$$$js = $$Value$Transferable$$$js$$$js;
+    $$fieldMap$Transferable$$js = $$fieldMap$Transferable$$js;
+    $$record$Transferable$$js = $$record$Transferable$$js;
   })();
   var $crux_compile;
   (function() {
@@ -956,10 +995,12 @@ function _rts_new_exception(name, baseException) {
   (function() {
     var $0 = function newWorker(str) { return new Worker(str) };
     var new$ = $0;
-    function postMessage(worker, message) {
-      var $1 = worker;
-      var $2 = ($1).postMessage(message);
-      return $2;
+    function postMessage($js$Transferable$5) {
+      return (function(worker, message) {
+        var $1 = worker;
+        var $2 = ($1).postMessage(message);
+        return $2;
+      });
     }
     var $3 = function(e) { return e.data; };
     var getData = $3;
@@ -981,8 +1022,8 @@ function _rts_new_exception(name, baseException) {
     function TimerId(a0) {
       return ["TimerId", a0];
     }
-    function unTimerId($_6) {
-      var t = $_6[1];
+    function unTimerId($_7) {
+      var t = $_7[1];
       return t;
     }
     var COMPILE_DELAY = 1000;
@@ -1035,11 +1076,11 @@ function _rts_new_exception(name, baseException) {
     function LastCompile(a0, a1) {
       return ["LastCompile", a0, a1];
     }
-    $$LastCompile$Eq$$$main$$$cmp = {eq:(function($_7, $_8) {
-      var a = $_7[1];
-      var b = $_7[2];
-      var c = $_8[1];
-      var d = $_8[2];
+    $$LastCompile$Eq$$$main$$$cmp = {eq:(function($_8, $_9) {
+      var a = $_8[1];
+      var b = $_8[2];
+      var c = $_9[1];
+      var d = $_9[2];
       var $15 = $cmp_eq($$String$Eq$$$string$$$cmp);
       var $16 = $15(a, c);
       var $17 = $cmp_eq($$Boolean$Eq$$$types$$$cmp);
@@ -1050,8 +1091,8 @@ function _rts_new_exception(name, baseException) {
     function Compiler(a0) {
       return ["Compiler", a0];
     }
-    function compile($_9, source, optimize) {
-      var this$ = $_9[1];
+    function compile($_10, source, optimize) {
+      var this$ = $_10[1];
       var $20 = (this$).state;
       var $21;
       if (("Idle"===$20[0])) {
@@ -1100,7 +1141,7 @@ function _rts_new_exception(name, baseException) {
       else {
         $30 = (void 0);
       }
-      var $38 = setTimeout((function() {
+      var $45 = setTimeout((function() {
         var $31 = (this$).nextCompileID;
         {
           var compileID = $31;
@@ -1108,236 +1149,245 @@ function _rts_new_exception(name, baseException) {
         var $32 = (this$).nextCompileID;
         var $33 = ($32+1);
         (this$).nextCompileID = $33;
-        var $34 = (this$).worker;
-        var $35 = {compileID:compileID, source:source};
-        var $36 = $dom$worker_postMessage($34, $35);
-        var $37 = Compiling({compileID:compileID, source:source, optimize:optimize});
-        (this$).state = $37;
+        var $40 = $$record$Transferable$$js((function(rec) {
+          var $34 = $$fieldMap$Transferable$$js($$Number$Transferable$$$number$$$js);
+          var $35 = (rec).compileID;
+          var $36 = $34($35);
+          var $37 = $$fieldMap$Transferable$$js($$String$Transferable$$$string$$$js);
+          var $38 = (rec).source;
+          var $39 = $37($38);
+          return {compileID:$36, source:$39};
+        }));
+        var $41 = $dom$worker_postMessage($40);
+        var $42 = (this$).worker;
+        var $43 = $41($42, {compileID:compileID, source:source});
+        var $44 = Compiling({compileID:compileID, source:source, optimize:optimize});
+        (this$).state = $44;
         return (void 0);
       }), COMPILE_DELAY);
-      var $39 = Waiting($38);
-      (this$).state = $39;
+      var $46 = Waiting($45);
+      (this$).state = $46;
       return (void 0);
     }
-    function receiveCompilationResponse($_10, response) {
-      var this$ = $_10[1];
-      var $40 = (this$).state;
-      var $41;
-      if (("Compiling"===$40[0])) {
+    function receiveCompilationResponse($_11, response) {
+      var this$ = $_11[1];
+      var $47 = (this$).state;
+      var $48;
+      if (("Compiling"===$47[0])) {
         {
-          var settings = $40[1];
+          var settings = $47[1];
         }
-        var $42 = $cmp_neq($$Number$Eq$$$number$$$cmp);
-        var $43 = (settings).compileID;
-        var $44 = (response).compileID;
-        var $45 = $42($43, $44);
-        var $46;
-        if ($45) {
-          return (void 0);
-        }
-        else {
-          $46 = (void 0);
-        }
-        var $47 = (settings).source;
-        var $48 = (settings).optimize;
-        var $49 = $tuple_Tuple2($47, $48);
-        $41 = $49;
-      }
-      else {
-        {
-        }
-        return (void 0);
-      }
-      {
-        var source = $41[1];
-        var optimize = $41[2];
-      }
-      var $50 = (response).success;
-      var $51;
-      if ($50) {
-        var $52 = $boolean_not(optimize);
+        var $49 = $cmp_neq($$Number$Eq$$$number$$$cmp);
+        var $50 = (settings).compileID;
+        var $51 = (response).compileID;
+        var $52 = $49($50, $51);
         var $53;
         if ($52) {
-          (this$).state = Idle;
-          var $54 = LastCompile(source, optimize);
-          var $55 = $option_Some($54);
-          (this$).lastCompile = $55;
-          var $56 = (response).result;
-          var $57 = $result_Ok($56);
-          var $58 = (this$).onresult($57);
           return (void 0);
         }
         else {
-          var $59 = (response).result;
-          $53 = $59;
+          $53 = (void 0);
         }
-        $51 = $53;
+        var $54 = (settings).source;
+        var $55 = (settings).optimize;
+        var $56 = $tuple_Tuple2($54, $55);
+        $48 = $56;
       }
       else {
-        (this$).state = Idle;
-        var $60 = LastCompile(source, optimize);
-        var $61 = $option_Some($60);
-        (this$).lastCompile = $61;
-        var $62 = (response).result;
-        var $63 = ("Compile error:\n"+$62);
-        var $64 = $result_Err($63);
-        var $65 = (this$).onresult($64);
+        {
+        }
         return (void 0);
       }
       {
-        var result = $51;
+        var source = $48[1];
+        var optimize = $48[2];
       }
-      var $66 = newXmlHttpRequest();
+      var $57 = (response).success;
+      var $58;
+      if ($57) {
+        var $59 = $boolean_not(optimize);
+        var $60;
+        if ($59) {
+          (this$).state = Idle;
+          var $61 = LastCompile(source, optimize);
+          var $62 = $option_Some($61);
+          (this$).lastCompile = $62;
+          var $63 = (response).result;
+          var $64 = $result_Ok($63);
+          var $65 = (this$).onresult($64);
+          return (void 0);
+        }
+        else {
+          var $66 = (response).result;
+          $60 = $66;
+        }
+        $58 = $60;
+      }
+      else {
+        (this$).state = Idle;
+        var $67 = LastCompile(source, optimize);
+        var $68 = $option_Some($67);
+        (this$).lastCompile = $68;
+        var $69 = (response).result;
+        var $70 = ("Compile error:\n"+$69);
+        var $71 = $result_Err($70);
+        var $72 = (this$).onresult($71);
+        return (void 0);
+      }
       {
-        var xhr = $66;
+        var result = $58;
       }
-      var $67 = (xhr).open("POST", "https://crux-closure-service.herokuapp.com/compile");
-      var $68 = (xhr).setRequestHeader("content-type", "application/json");
+      var $73 = newXmlHttpRequest();
+      {
+        var xhr = $73;
+      }
+      var $74 = (xhr).open("POST", "https://crux-closure-service.herokuapp.com/compile");
+      var $75 = (xhr).setRequestHeader("content-type", "application/json");
       (xhr).timeout = 60000;
-      var $69 = toJson({source:result});
-      var $70 = (xhr).send($69);
-      var $71 = Optimizing(xhr);
-      (this$).state = $71;
+      var $76 = toJson({source:result});
+      var $77 = (xhr).send($76);
+      var $78 = Optimizing(xhr);
+      (this$).state = $78;
       (xhr).onload = (function() {
-        var $72 = (xhr).response;
-        var $73 = parseJson($72);
+        var $79 = (xhr).response;
+        var $80 = parseJson($79);
         {
-          var result2 = $73;
+          var result2 = $80;
         }
         (this$).state = Idle;
-        var $74 = LastCompile(source, optimize);
-        var $75 = $option_Some($74);
-        (this$).lastCompile = $75;
-        var $76 = (result2).source;
-        var $77 = $result_Ok($76);
-        var $78 = (this$).onresult($77);
-        return $78;
+        var $81 = LastCompile(source, optimize);
+        var $82 = $option_Some($81);
+        (this$).lastCompile = $82;
+        var $83 = (result2).source;
+        var $84 = $result_Ok($83);
+        var $85 = (this$).onresult($84);
+        return $85;
       });
       (xhr).onerror = (function(e) {
         (this$).lastCompile = $option_None;
-        var $79 = ("Network error:\n"+e);
-        var $80 = $result_Err($79);
-        var $81 = (this$).onresult($80);
-        return $81;
+        var $86 = ("Network error:\n"+e);
+        var $87 = $result_Err($86);
+        var $88 = (this$).onresult($87);
+        return $88;
       });
       (xhr).ontimeout = (function() {
         (this$).lastCompile = $option_None;
-        var $82 = $result_Err("Network timeout");
-        var $83 = (this$).onresult($82);
-        return $83;
+        var $89 = $result_Err("Network timeout");
+        var $90 = (this$).onresult($89);
+        return $90;
       });
       return (void 0);
     }
     function newCompiler(onresult) {
-      var $84 = $dom$worker_new("compiler-worker.js");
+      var $91 = $dom$worker_new("compiler-worker.js");
       {
-        var compilerThread = $84;
+        var compilerThread = $91;
       }
-      var $85 = Compiler({state:Idle, lastCompile:$option_None, onresult:onresult, nextCompileID:0, worker:compilerThread});
+      var $92 = Compiler({state:Idle, lastCompile:$option_None, onresult:onresult, nextCompileID:0, worker:compilerThread});
       {
-        var compiler = $85;
+        var compiler = $92;
       }
-      var $88 = $dom$worker_setHandler(compilerThread, (function(response) {
-        var $86 = response;
-        var $87 = receiveCompilationResponse(compiler, $86);
-        return $87;
+      var $95 = $dom$worker_setHandler(compilerThread, (function(response) {
+        var $93 = response;
+        var $94 = receiveCompilationResponse(compiler, $93);
+        return $94;
       }));
       return compiler;
     }
     function main() {
-      var $89 = querySelector(".crux-playground .source");
+      var $96 = querySelector(".crux-playground .source");
       {
-        var sourceTextArea = $89;
+        var sourceTextArea = $96;
       }
-      var $90 = querySelector(".crux-playground .output");
+      var $97 = querySelector(".crux-playground .output");
       {
-        var outputTextArea = $90;
+        var outputTextArea = $97;
       }
-      var $91 = querySelector(".crux-playground .optimize");
+      var $98 = querySelector(".crux-playground .optimize");
       {
-        var optimizeCheckbox = $91;
+        var optimizeCheckbox = $98;
       }
-      var $92 = querySelector(".crux-playground .run");
+      var $99 = querySelector(".crux-playground .run");
       {
-        var runButton = $92;
+        var runButton = $99;
       }
       {
         var loadExampleSource = (function() {
-          var $93 = getElementById("initial_example");
-          var $94 = ($93).text;
+          var $100 = getElementById("initial_example");
+          var $101 = ($100).text;
           {
-            var source = $94;
+            var source = $101;
           }
-          var $95 = $string_trim(source);
-          source = $95;
+          var $102 = $string_trim(source);
+          source = $102;
           (sourceTextArea).value = source;
           return (void 0);
         });
       }
-      var $101 = newCompiler((function(result) {
-        var $96;
+      var $108 = newCompiler((function(result) {
+        var $103;
         if (("Ok"===result[0])) {
           {
             var res = result[1];
           }
-          var $97 = (outputTextArea).classList;
-          var $98 = ($97).remove("has-errors");
+          var $104 = (outputTextArea).classList;
+          var $105 = ($104).remove("has-errors");
           (outputTextArea).value = res;
-          $96 = (void 0);
+          $103 = (void 0);
         }
         else {
           if (("Err"===result[0])) {
             {
               var err = result[1];
             }
-            var $99 = (outputTextArea).classList;
-            var $100 = ($99).add("has-errors");
+            var $106 = (outputTextArea).classList;
+            var $107 = ($106).add("has-errors");
             (outputTextArea).value = err;
-            $96 = (void 0);
+            $103 = (void 0);
           }
           else {
           }
         }
-        return $96;
+        return $103;
       }));
       {
-        var compiler = $101;
+        var compiler = $108;
       }
       {
         var recompile = (function() {
-          var $102 = (sourceTextArea).value;
+          var $109 = (sourceTextArea).value;
           {
-            var content = $102;
+            var content = $109;
           }
-          var $103 = (optimizeCheckbox).checked;
+          var $110 = (optimizeCheckbox).checked;
           {
-            var optimize = $103;
+            var optimize = $110;
           }
-          var $104 = compile(compiler, content, optimize);
-          return $104;
+          var $111 = compile(compiler, content, optimize);
+          return $111;
         });
       }
       {
         var registerCompileListener = (function() {
-          var $105 = (sourceTextArea).addEventListener("input", recompile);
-          var $106 = (optimizeCheckbox).addEventListener("change", recompile);
-          return $106;
+          var $112 = (sourceTextArea).addEventListener("input", recompile);
+          var $113 = (optimizeCheckbox).addEventListener("change", recompile);
+          return $113;
         });
       }
-      var $107 = loadExampleSource();
-      var $108 = registerCompileListener();
-      var $109 = recompile();
+      var $114 = loadExampleSource();
+      var $115 = registerCompileListener();
+      var $116 = recompile();
       (sourceTextArea).disabled = $types_False;
-      var $110 = (sourceTextArea).setSelectionRange(0, 0);
-      var $111 = (sourceTextArea).focus();
-      var $113 = (runButton).addEventListener("click", (function() {
-        var $112 = $builtin_print("run button temporarily disabled");
-        return $112;
+      var $117 = (sourceTextArea).setSelectionRange(0, 0);
+      var $118 = (sourceTextArea).focus();
+      var $120 = (runButton).addEventListener("click", (function() {
+        var $119 = $builtin_print("run button temporarily disabled");
+        return $119;
       }));
-      return $113;
+      return $120;
     }
-    var $114 = main();
-    var $115 = main();
+    var $121 = main();
+    var $122 = main();
     $$LastCompile$Eq$$$main$$$cmp = $$LastCompile$Eq$$$main$$$cmp;
   })();
 })();

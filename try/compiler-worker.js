@@ -850,16 +850,24 @@ function _rts_new_exception(name, baseException) {
   var $$Number$ToValue$$$number$$$js;
   var $$Boolean$ToValue$$$types$$$js;
   var $$Value$ToValue$$$js$$$js;
+  var $$Void$Transferable$$$types$$$js;
+  var $$Boolean$Transferable$$$types$$$js;
+  var $$String$Transferable$$$string$$$js;
+  var $$Number$Transferable$$$number$$$js;
+  var $$Array$Transferable$$$array$$$js;
+  var $$Value$Transferable$$$js$$$js;
+  var $$fieldMap$Transferable$$js;
+  var $$record$Transferable$$js;
   (function() {
     var Null = null;
     var Undefined = (void 0);
     function fromValue(dict) {
       return (dict).fromValue;
     }
-    var checkAndCast = (function($cmp$Eq$19) {
+    var checkAndCast = (function($cmp$Eq$20) {
       return (function(typeString) {
         return (function(value) {
-          var $0 = $cmp_eq($cmp$Eq$19);
+          var $0 = $cmp_eq($cmp$Eq$20);
           var $1 = $js$unsafe_typeof(value);
           var $2 = $0($1, typeString);
           var $3;
@@ -903,6 +911,29 @@ function _rts_new_exception(name, baseException) {
     $$Value$ToValue$$$js$$$js = {toValue:(function(value) {
       return value;
     })};
+    $$Void$Transferable$$$types$$$js = {};
+    $$Boolean$Transferable$$$types$$$js = {};
+    $$String$Transferable$$$string$$$js = {};
+    $$Number$Transferable$$$number$$$js = {};
+    $$Array$Transferable$$$array$$$js = (function($js$Transferable$73) {
+      return {};
+    });
+    $$Value$Transferable$$$js$$$js = {};
+    function requireTransferable($js$Transferable$79) {
+      return (function($_6) {
+        return (void 0);
+      });
+    }
+    $$fieldMap$Transferable$$js = (function($js$Transferable$90) {
+      return (function(fieldValue) {
+        var $15 = requireTransferable($js$Transferable$90);
+        var $16 = $15(fieldValue);
+        return $16;
+      });
+    });
+    $$record$Transferable$$js = (function(fieldMap) {
+      return {};
+    });
     $js_Null = Null;
     $js_Undefined = Undefined;
     $js_fromValue = fromValue;
@@ -915,6 +946,14 @@ function _rts_new_exception(name, baseException) {
     $$Number$ToValue$$$number$$$js = $$Number$ToValue$$$number$$$js;
     $$Boolean$ToValue$$$types$$$js = $$Boolean$ToValue$$$types$$$js;
     $$Value$ToValue$$$js$$$js = $$Value$ToValue$$$js$$$js;
+    $$Void$Transferable$$$types$$$js = $$Void$Transferable$$$types$$$js;
+    $$Boolean$Transferable$$$types$$$js = $$Boolean$Transferable$$$types$$$js;
+    $$String$Transferable$$$string$$$js = $$String$Transferable$$$string$$$js;
+    $$Number$Transferable$$$number$$$js = $$Number$Transferable$$$number$$$js;
+    $$Array$Transferable$$$array$$$js = $$Array$Transferable$$$array$$$js;
+    $$Value$Transferable$$$js$$$js = $$Value$Transferable$$$js$$$js;
+    $$fieldMap$Transferable$$js = $$fieldMap$Transferable$$js;
+    $$record$Transferable$$js = $$record$Transferable$$js;
   })();
   var $crux_compile;
   (function() {
@@ -974,7 +1013,7 @@ function _rts_new_exception(name, baseException) {
       });
       return (void 0);
     }
-    function postMessage($js$ToValue$55) {
+    function postMessage($js$Transferable$55) {
       return (function(value) {
         var $6 = (self).postMessage(value);
         return $6;
@@ -988,7 +1027,7 @@ function _rts_new_exception(name, baseException) {
   (function() {
     function main() {
       var $0 = $dom$workerself_importScripts(["crux.js"]);
-      var $10 = $dom$workerself_setHandler((function(message) {
+      var $19 = $dom$workerself_setHandler((function(message) {
         var $1 = message;
         {
           var compileRequest = $1;
@@ -1017,17 +1056,25 @@ function _rts_new_exception(name, baseException) {
         {
           var result = $4;
         }
-        var $7 = result;
-        {
-          var postedResult = $7;
-        }
-        var $8 = $dom$workerself_postMessage($$Value$ToValue$$$js$$$js);
-        var $9 = $8(postedResult);
-        return $9;
+        var $16 = $$record$Transferable$$js((function(rec) {
+          var $7 = $$fieldMap$Transferable$$js($$Number$Transferable$$$number$$$js);
+          var $8 = (rec).compileID;
+          var $9 = $7($8);
+          var $10 = $$fieldMap$Transferable$$js($$Boolean$Transferable$$$types$$$js);
+          var $11 = (rec).success;
+          var $12 = $10($11);
+          var $13 = $$fieldMap$Transferable$$js($$String$Transferable$$$string$$$js);
+          var $14 = (rec).result;
+          var $15 = $13($14);
+          return {compileID:$9, success:$12, result:$15};
+        }));
+        var $17 = $dom$workerself_postMessage($16);
+        var $18 = $17(result);
+        return $18;
       }));
-      return $10;
+      return $19;
     }
-    var $11 = main();
-    var $12 = main();
+    var $20 = main();
+    var $21 = main();
   })();
 })();
