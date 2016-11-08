@@ -116,6 +116,7 @@ function _rts_new_exception(name, baseException) {
   var $cmp_neq;
   var $$Boolean$Eq$$$types$$$cmp;
   var $cmp_lt;
+  var $$Void$Ordered$$$types$$$cmp;
   var $cmp_gte;
   var $cmp_lte;
   var $cmp_gt;
@@ -142,37 +143,40 @@ function _rts_new_exception(name, baseException) {
     function lt(dict) {
       return (dict).lt;
     }
-    function gte($cmp$Ordered$28) {
+    $$Void$Ordered$$$types$$$cmp = {lt:(function($_0, $_1) {
+      return $types_False;
+    })};
+    function gte($cmp$Ordered$30) {
       return (function(lhs, rhs) {
-        var $3 = lt($cmp$Ordered$28);
+        var $3 = lt($cmp$Ordered$30);
         var $4 = $3(lhs, rhs);
         var $5 = $boolean_not($4);
         return $5;
       });
     }
-    function lte($cmp$Eq$42, $cmp$Ordered$42) {
+    function lte($cmp$Eq$44, $cmp$Ordered$44) {
       return (function(lhs, rhs) {
-        var $6 = lt($cmp$Ordered$42);
+        var $6 = lt($cmp$Ordered$44);
         var $7 = $6(lhs, rhs);
-        var $8 = eq($cmp$Eq$42);
+        var $8 = eq($cmp$Eq$44);
         var $9 = $8(lhs, rhs);
         var $10 = ($7||$9);
         return $10;
       });
     }
-    function gt($cmp$Eq$56, $cmp$Ordered$56) {
+    function gt($cmp$Eq$58, $cmp$Ordered$58) {
       return (function(lhs, rhs) {
-        var $11 = lt($cmp$Ordered$56);
+        var $11 = lt($cmp$Ordered$58);
         var $12 = $11(rhs, lhs);
-        var $13 = neq($cmp$Eq$56);
+        var $13 = neq($cmp$Eq$58);
         var $14 = $13(lhs, rhs);
         var $15 = ($12&&$14);
         return $15;
       });
     }
-    function min($cmp$Ordered$62) {
+    function min($cmp$Ordered$64) {
       return (function(lhs, rhs) {
-        var $16 = lt($cmp$Ordered$62);
+        var $16 = lt($cmp$Ordered$64);
         var $17 = $16(lhs, rhs);
         var $18;
         if ($17) {
@@ -184,9 +188,9 @@ function _rts_new_exception(name, baseException) {
         return $18;
       });
     }
-    function max($cmp$Ordered$74) {
+    function max($cmp$Ordered$76) {
       return (function(lhs, rhs) {
-        var $19 = lt($cmp$Ordered$74);
+        var $19 = lt($cmp$Ordered$76);
         var $20 = $19(rhs, lhs);
         var $21;
         if ($20) {
@@ -202,16 +206,16 @@ function _rts_new_exception(name, baseException) {
     var EqualTo = 0;
     var GreaterThan = 1;
     $$Ordering$Eq$$$cmp$$$cmp = {eq:$js$unsafe_eq};
-    function compare($cmp$Ordered$100) {
+    function compare($cmp$Ordered$102) {
       return (function(lhs, rhs) {
-        var $22 = lt($cmp$Ordered$100);
+        var $22 = lt($cmp$Ordered$102);
         var $23 = $22(lhs, rhs);
         var $24;
         if ($23) {
           $24 = LessThan;
         }
         else {
-          var $25 = lt($cmp$Ordered$100);
+          var $25 = lt($cmp$Ordered$102);
           var $26 = $25(rhs, lhs);
           var $27;
           if ($26) {
@@ -229,6 +233,7 @@ function _rts_new_exception(name, baseException) {
     $cmp_neq = neq;
     $$Boolean$Eq$$$types$$$cmp = $$Boolean$Eq$$$types$$$cmp;
     $cmp_lt = lt;
+    $$Void$Ordered$$$types$$$cmp = $$Void$Ordered$$$types$$$cmp;
     $cmp_gte = gte;
     $cmp_lte = lte;
     $cmp_gt = gt;
@@ -276,7 +281,7 @@ function _rts_new_exception(name, baseException) {
       var $3 = ($2).length;
       return $3;
     })};
-    $$Array$Eq$$$array$$$cmp = (function($cmp$Eq$36) {
+    $$Array$Eq$$$array$$$cmp = (function($cmp$Eq$32) {
       return {eq:(function(lhs, rhs) {
         var $4 = $length_len($$Array$HasLength$$$array$$$length);
         var $5 = $4(lhs);
@@ -312,7 +317,7 @@ function _rts_new_exception(name, baseException) {
           else {
             $14 = (void 0);
           }
-          var $15 = $cmp_neq($cmp$Eq$36);
+          var $15 = $cmp_neq($cmp$Eq$32);
           var $16 = get(lhs, i);
           var $17 = get(rhs, i);
           var $18 = $15($16, $17);
@@ -421,7 +426,7 @@ function _rts_new_exception(name, baseException) {
       return ["Some", a0];
     }
     var None = ["None"];
-    $$Option$Eq$$$option$$$cmp = (function($cmp$Eq$5) {
+    $$Option$Eq$$$option$$$cmp = (function($cmp$Eq$3) {
       return {eq:(function(lhs, rhs) {
         var $0 = $tuple_Tuple2(lhs, rhs);
         var $1;
@@ -436,7 +441,7 @@ function _rts_new_exception(name, baseException) {
               var x = $0[1][1];
               var y = $0[2][1];
             }
-            var $2 = $cmp_eq($cmp$Eq$5);
+            var $2 = $cmp_eq($cmp$Eq$3);
             var $3 = $2(x, y);
             $1 = $3;
           }
@@ -724,41 +729,41 @@ function _rts_new_exception(name, baseException) {
     function Tuple8(a0, a1, a2, a3, a4, a5, a6, a7) {
       return ["Tuple8", a0, a1, a2, a3, a4, a5, a6, a7];
     }
-    $$Tuple2$Eq$$$tuple$$$cmp = (function($cmp$Eq$79, $cmp$Eq$80) {
-      return {eq:(function($_0, $_1) {
-        var a1 = $_0[1];
-        var a2 = $_0[2];
-        var b1 = $_1[1];
-        var b2 = $_1[2];
-        var $0 = $cmp_eq($cmp$Eq$79);
+    $$Tuple2$Eq$$$tuple$$$cmp = (function($cmp$Eq$71, $cmp$Eq$72) {
+      return {eq:(function($_2, $_3) {
+        var a1 = $_2[1];
+        var a2 = $_2[2];
+        var b1 = $_3[1];
+        var b2 = $_3[2];
+        var $0 = $cmp_eq($cmp$Eq$71);
         var $1 = $0(a1, b1);
-        var $2 = $cmp_eq($cmp$Eq$80);
+        var $2 = $cmp_eq($cmp$Eq$72);
         var $3 = $2(a2, b2);
         var $4 = ($1&&$3);
         return $4;
       })};
     });
-    $$Tuple2$Ordered$$$tuple$$$cmp = (function($cmp$Ordered$101, $cmp$Ordered$102) {
-      return {lt:(function($_2, $_3) {
-        var a1 = $_2[1];
-        var a2 = $_2[2];
-        var b1 = $_3[1];
-        var b2 = $_3[2];
-        var $5 = $cmp_lt($cmp$Ordered$101);
+    $$Tuple2$Ordered$$$tuple$$$cmp = (function($cmp$Ordered$93, $cmp$Ordered$94) {
+      return {lt:(function($_4, $_5) {
+        var a1 = $_4[1];
+        var a2 = $_4[2];
+        var b1 = $_5[1];
+        var b2 = $_5[2];
+        var $5 = $cmp_lt($cmp$Ordered$93);
         var $6 = $5(a1, b1);
         var $7;
         if ($6) {
           $7 = $types_True;
         }
         else {
-          var $8 = $cmp_lt($cmp$Ordered$101);
+          var $8 = $cmp_lt($cmp$Ordered$93);
           var $9 = $8(b1, a1);
           var $10;
           if ($9) {
             $10 = $types_False;
           }
           else {
-            var $11 = $cmp_lt($cmp$Ordered$102);
+            var $11 = $cmp_lt($cmp$Ordered$94);
             var $12 = $11(a2, b2);
             $10 = $12;
           }
