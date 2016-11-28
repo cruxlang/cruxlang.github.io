@@ -989,6 +989,376 @@ function _rts_new_exception(name, baseException) {
     }
     $crux_compile = compile;
   })();
+  var $dict_new;
+  var $dict_from;
+  var $dict_set;
+  var $dict_get;
+  var $dict_delete;
+  var $dict_keys;
+  var $dict_items;
+  var $dict_map;
+  var $$Dict$Transferable$$$dict$$$js;
+  (function() {
+    function new$() {
+      var $0 = Object;
+      var $1 = ($0).create($js_Null);
+      return $1;
+    }
+    var $2 = function copyObject(obj) { var rv = Object.create(null); for (var key in obj) { rv[key] = obj[key]; } return rv; };
+    var unsafeCopyObject = $2;
+    function from(record) {
+      var $3 = unsafeCopyObject(record);
+      return $3;
+    }
+    function set(dict, key, value) {
+      var $4 = $js$unsafe_setProperty(dict, key, value);
+      return (void 0);
+    }
+    function get(dict, key) {
+      var $5 = $js$unsafe_getProperty(dict, key);
+      {
+        var v = $5;
+      }
+      var $6 = $js$unsafe_eqNonstrict(v, $js_Null);
+      var $7;
+      if ($6) {
+        $7 = $option_None;
+      }
+      else {
+        var $8 = $option_Some(v);
+        $7 = $8;
+      }
+      return $7;
+    }
+    var $9 = function delete_(o, k) { delete o[k]; };
+    var delete$ = $9;
+    function keys(dict) {
+      var $10 = Object;
+      var $11 = ($10).keys(dict);
+      return $11;
+    }
+    function items(dict) {
+      {
+        var rv = [];
+      }
+      var $12 = keys(dict);
+      var $14 = 0;
+      var $15 = ($12).length;
+      while (true)
+      {
+        var $13 = ($14<$15);
+        if ($13) {
+        }
+        else {
+          break;
+        }
+        var key = $12[$14];
+        var $16 = $js$unsafe_getProperty(dict, key);
+        var $17 = $tuple_Tuple2(key, $16);
+        var $18 = $mutarray_append(rv, $17);
+        $14 = ($14+1);
+      }
+      var $19 = $mutarray_unsafeFreeze(rv);
+      return $19;
+    }
+    function map(dict, fn) {
+      var $20 = new$();
+      {
+        var result = $20;
+      }
+      var $21 = keys(dict);
+      var $23 = 0;
+      var $24 = ($21).length;
+      while (true)
+      {
+        var $22 = ($23<$24);
+        if ($22) {
+        }
+        else {
+          break;
+        }
+        var key = $21[$23];
+        var $25 = $js$unsafe_getProperty(dict, key);
+        {
+          var prop = $25;
+        }
+        var $26 = fn(prop);
+        {
+          var newProp = $26;
+        }
+        var $27 = set(result, key, newProp);
+        $23 = ($23+1);
+      }
+      return result;
+    }
+    $$Dict$Transferable$$$dict$$$js = (function($js$Transferable$187) {
+      return {};
+    });
+    $dict_new = new$;
+    $dict_from = from;
+    $dict_set = set;
+    $dict_get = get;
+    $dict_delete = delete$;
+    $dict_keys = keys;
+    $dict_items = items;
+    $dict_map = map;
+    $$Dict$Transferable$$$dict$$$js = $$Dict$Transferable$$$dict$$$js;
+  })();
+  var $json_decodeNumber;
+  var $json_decodeBoolean;
+  var $json_decodeString;
+  var $json_decodeNullable;
+  var $json_decodeArray;
+  var $json_decodeKey;
+  var $json_fromString;
+  var $json_renderJSON;
+  var $json_toJSON;
+  var $$Value$ToJSON$$$json$$$json;
+  var $$Array$ToJSON$$$array$$$json;
+  var $$String$ToJSON$$$string$$$json;
+  var $$Number$ToJSON$$$number$$$json;
+  var $$Boolean$ToJSON$$$types$$$json;
+  var $$Null$ToJSON$$$js$$$json;
+  var $$Dict$ToJSON$$$dict$$$json;
+  var $$Option$ToJSON$$$option$$$json;
+  var $$fieldMap$ToJSON$$json;
+  var $$record$ToJSON$$json;
+  var $json_encode;
+  (function() {
+    function Error(a0) {
+      return ["Error", a0];
+    }
+    var $0 = function (x) { return typeof x; };
+    var _typeOf = $0;
+    var $1 = function (e) { throw e; };
+    var _throw = $1;
+    var $2 = function (o) { return o === null; };
+    var _isNull = $2;
+    var $3 = function (o, k) { return o[k]; };
+    var _getAttr = $3;
+    var $4 = function (s) { return JSON.parse(s); };
+    var _parseJson = $4;
+    var $5 = function (a) { return Array.isArray(a); };
+    var _isArray = $5;
+    var $6 = function (o) { return JSON.stringify(o); };
+    var _stringify = $6;
+    function assert(b, error) {
+      var $7 = $boolean_not(b);
+      var $8;
+      if ($7) {
+        var $9 = Error(error);
+        var $10 = _throw($9);
+        $8 = $10;
+      }
+      else {
+        $8 = (void 0);
+      }
+      return $8;
+    }
+    function assertTypeOf(a, expectedType) {
+      var $11 = _typeOf(a);
+      {
+        var t = $11;
+      }
+      var $12 = $cmp_neq($$String$Eq$$$string$$$cmp);
+      var $13 = $12(expectedType, t);
+      var $14;
+      if ($13) {
+        var $15 = ("Wanted "+expectedType);
+        var $16 = ($15+" but got ");
+        var $17 = ($16+t);
+        var $18 = ($17+": ");
+        var $19 = _stringify(a);
+        var $20 = ($18+$19);
+        var $21 = Error($20);
+        var $22 = _throw($21);
+        $14 = $22;
+      }
+      else {
+        $14 = (void 0);
+      }
+      return $14;
+    }
+    function decodeNumber(a) {
+      var $23 = assertTypeOf(a, "number");
+      var $24 = a;
+      return $24;
+    }
+    function decodeBoolean(a) {
+      var $25 = assertTypeOf(a, "boolean");
+      var $26 = a;
+      return $26;
+    }
+    function decodeString(a) {
+      var $27 = assertTypeOf(a, "string");
+      var $28 = a;
+      return $28;
+    }
+    function decodeNullable(decoder) {
+      return (function(a) {
+        var $29 = _isNull(a);
+        var $30;
+        if ($29) {
+          return $option_None;
+        }
+        else {
+          var $31 = decoder(a);
+          var $32 = $option_Some($31);
+          return $32;
+        }
+        return $30;
+      });
+    }
+    function decodeArray(elementDecoder) {
+      return (function(arr) {
+        var $33 = _isArray(arr);
+        var $34 = _stringify(arr);
+        var $35 = ("Expected array but got "+$34);
+        var $36 = assert($33, $35);
+        {
+          var result = [];
+        }
+        var $37 = arr;
+        var $39 = 0;
+        var $40 = ($37).length;
+        while (true)
+        {
+          var $38 = ($39<$40);
+          if ($38) {
+          }
+          else {
+            break;
+          }
+          var element = $37[$39];
+          var $41 = elementDecoder(element);
+          var $42 = $mutarray_append(result, $41);
+          $39 = ($39+1);
+        }
+        var $43 = $mutarray_freeze(result);
+        return $43;
+      });
+    }
+    function decodeKey(keyDecoder, obj, key) {
+      var $44 = assertTypeOf(obj, "object");
+      var $45 = _getAttr(obj, key);
+      var $46 = keyDecoder($45);
+      return $46;
+    }
+    function fromString(s, decoder) {
+      var $47 = _parseJson(s);
+      var $48 = decoder($47);
+      return $48;
+    }
+    var $49 = null;
+    var nullJSValue = $49;
+    var $50 = JSON.stringify;
+    var renderJSON = $50;
+    function toJSON(dict) {
+      return (dict).toJSON;
+    }
+    $$Value$ToJSON$$$json$$$json = {toJSON:(function(v) {
+      return v;
+    })};
+    $$Array$ToJSON$$$array$$$json = (function($json$ToJSON$212) {
+      return {toJSON:(function(array) {
+        var $51 = toJSON($json$ToJSON$212);
+        var $52 = $array_map(array, $51);
+        var $53 = $52;
+        return $53;
+      })};
+    });
+    $$String$ToJSON$$$string$$$json = {toJSON:(function(str) {
+      var $54 = str;
+      return $54;
+    })};
+    $$Number$ToJSON$$$number$$$json = {toJSON:(function(num) {
+      var $55 = num;
+      return $55;
+    })};
+    $$Boolean$ToJSON$$$types$$$json = {toJSON:(function(b) {
+      var $56 = b;
+      return $56;
+    })};
+    $$Null$ToJSON$$$js$$$json = {toJSON:(function($_7) {
+      return nullJSValue;
+    })};
+    $$Dict$ToJSON$$$dict$$$json = (function($json$ToJSON$239) {
+      return {toJSON:(function(d) {
+        var $57 = toJSON($json$ToJSON$239);
+        var $58 = $dict_map(d, $57);
+        var $59 = $58;
+        return $59;
+      })};
+    });
+    $$Option$ToJSON$$$option$$$json = (function($json$ToJSON$252) {
+      return {toJSON:(function(v) {
+        var $60;
+        if (("None"===v[0])) {
+          {
+          }
+          $60 = nullJSValue;
+        }
+        else {
+          if (("Some"===v[0])) {
+            {
+              var x = v[1];
+            }
+            var $61 = toJSON($json$ToJSON$252);
+            var $62 = $61(x);
+            $60 = $62;
+          }
+          else {
+          }
+        }
+        return $60;
+      })};
+    });
+    $$fieldMap$ToJSON$$json = (function($json$ToJSON$271) {
+      return (function(fieldValue) {
+        var $63 = toJSON($json$ToJSON$271);
+        var $64 = $63(fieldValue);
+        return $64;
+      });
+    });
+    $$record$ToJSON$$json = (function(fieldMap) {
+      return {toJSON:(function(rec) {
+        var $65 = $$Dict$ToJSON$$$dict$$$json($$Value$ToJSON$$$json$$$json);
+        var $66 = toJSON($65);
+        var $67 = fieldMap(rec);
+        var $68 = $dict_from($67);
+        var $69 = $66($68);
+        return $69;
+      })};
+    });
+    function encode($json$ToJSON$285) {
+      return (function(value) {
+        var $70 = toJSON($json$ToJSON$285);
+        var $71 = $70(value);
+        var $72 = renderJSON($71);
+        return $72;
+      });
+    }
+    $json_decodeNumber = decodeNumber;
+    $json_decodeBoolean = decodeBoolean;
+    $json_decodeString = decodeString;
+    $json_decodeNullable = decodeNullable;
+    $json_decodeArray = decodeArray;
+    $json_decodeKey = decodeKey;
+    $json_fromString = fromString;
+    $json_renderJSON = renderJSON;
+    $json_toJSON = toJSON;
+    $$Value$ToJSON$$$json$$$json = $$Value$ToJSON$$$json$$$json;
+    $$Array$ToJSON$$$array$$$json = $$Array$ToJSON$$$array$$$json;
+    $$String$ToJSON$$$string$$$json = $$String$ToJSON$$$string$$$json;
+    $$Number$ToJSON$$$number$$$json = $$Number$ToJSON$$$number$$$json;
+    $$Boolean$ToJSON$$$types$$$json = $$Boolean$ToJSON$$$types$$$json;
+    $$Null$ToJSON$$$js$$$json = $$Null$ToJSON$$$js$$$json;
+    $$Dict$ToJSON$$$dict$$$json = $$Dict$ToJSON$$$dict$$$json;
+    $$Option$ToJSON$$$option$$$json = $$Option$ToJSON$$$option$$$json;
+    $$fieldMap$ToJSON$$json = $$fieldMap$ToJSON$$json;
+    $$record$ToJSON$$json = $$record$ToJSON$$json;
+    $json_encode = encode;
+  })();
   var $dom$worker_new;
   var $dom$worker_postMessage;
   var $dom$worker_setHandler;
@@ -1022,8 +1392,8 @@ function _rts_new_exception(name, baseException) {
     function TimerId(a0) {
       return ["TimerId", a0];
     }
-    function unTimerId($_7) {
-      var t = $_7[1];
+    function unTimerId($_8) {
+      var t = $_8[1];
       return t;
     }
     var COMPILE_DELAY = 1000;
@@ -1053,15 +1423,10 @@ function _rts_new_exception(name, baseException) {
       var $10 = new XMLHttpRequest;
       return $10;
     }
-    function toJson(o) {
-      var $11 = JSON.stringify;
-      var $12 = $11(o);
-      return $12;
-    }
     function parseJson(s) {
-      var $13 = JSON.parse;
-      var $14 = $13(s);
-      return $14;
+      var $11 = JSON.parse;
+      var $12 = $11(s);
+      return $12;
     }
     var Idle = ["Idle"];
     function Waiting(a0) {
@@ -1076,51 +1441,51 @@ function _rts_new_exception(name, baseException) {
     function LastCompile(a0, a1) {
       return ["LastCompile", a0, a1];
     }
-    $$LastCompile$Eq$$$main$$$cmp = {eq:(function($_8, $_9) {
-      var a = $_8[1];
-      var b = $_8[2];
-      var c = $_9[1];
-      var d = $_9[2];
-      var $15 = $cmp_eq($$String$Eq$$$string$$$cmp);
-      var $16 = $15(a, c);
-      var $17 = $cmp_eq($$Boolean$Eq$$$types$$$cmp);
-      var $18 = $17(b, d);
-      var $19 = ($16&&$18);
-      return $19;
+    $$LastCompile$Eq$$$main$$$cmp = {eq:(function($_9, $_10) {
+      var a = $_9[1];
+      var b = $_9[2];
+      var c = $_10[1];
+      var d = $_10[2];
+      var $13 = $cmp_eq($$String$Eq$$$string$$$cmp);
+      var $14 = $13(a, c);
+      var $15 = $cmp_eq($$Boolean$Eq$$$types$$$cmp);
+      var $16 = $15(b, d);
+      var $17 = ($14&&$16);
+      return $17;
     })};
     function Compiler(a0) {
       return ["Compiler", a0];
     }
-    function compile($_10, source, optimize) {
-      var this$ = $_10[1];
-      var $20 = (this$).state;
-      var $21;
-      if (("Idle"===$20[0])) {
+    function compile($_11, source, optimize) {
+      var this$ = $_11[1];
+      var $18 = (this$).state;
+      var $19;
+      if (("Idle"===$18[0])) {
         {
         }
-        $21 = (void 0);
+        $19 = (void 0);
       }
       else {
-        if (("Waiting"===$20[0])) {
+        if (("Waiting"===$18[0])) {
           {
-            var tid = $20[1];
+            var tid = $18[1];
           }
-          var $22 = clearTimeout(tid);
-          $21 = $22;
+          var $20 = clearTimeout(tid);
+          $19 = $20;
         }
         else {
-          if (("Compiling"===$20[0])) {
+          if (("Compiling"===$18[0])) {
             {
             }
-            $21 = (void 0);
+            $19 = (void 0);
           }
           else {
-            if (("Optimizing"===$20[0])) {
+            if (("Optimizing"===$18[0])) {
               {
-                var xhr = $20[1];
+                var xhr = $18[1];
               }
-              var $23 = (xhr).abort();
-              $21 = $23;
+              var $21 = (xhr).abort();
+              $19 = $21;
             }
             else {
             }
@@ -1128,70 +1493,70 @@ function _rts_new_exception(name, baseException) {
         }
       }
       (this$).state = Idle;
-      var $24 = $$Option$Eq$$$option$$$cmp($$LastCompile$Eq$$$main$$$cmp);
-      var $25 = $cmp_eq($24);
-      var $26 = (this$).lastCompile;
-      var $27 = LastCompile(source, optimize);
-      var $28 = $option_Some($27);
-      var $29 = $25($26, $28);
-      var $30;
-      if ($29) {
+      var $22 = $$Option$Eq$$$option$$$cmp($$LastCompile$Eq$$$main$$$cmp);
+      var $23 = $cmp_eq($22);
+      var $24 = (this$).lastCompile;
+      var $25 = LastCompile(source, optimize);
+      var $26 = $option_Some($25);
+      var $27 = $23($24, $26);
+      var $28;
+      if ($27) {
         return (void 0);
       }
       else {
-        $30 = (void 0);
+        $28 = (void 0);
       }
-      var $45 = setTimeout((function() {
-        var $31 = (this$).nextCompileID;
+      var $43 = setTimeout((function() {
+        var $29 = (this$).nextCompileID;
         {
-          var compileID = $31;
+          var compileID = $29;
         }
-        var $32 = (this$).nextCompileID;
-        var $33 = ($32+1);
-        (this$).nextCompileID = $33;
-        var $40 = $$record$Transferable$$js((function(rec) {
-          var $34 = $$fieldMap$Transferable$$js($$Number$Transferable$$$number$$$js);
-          var $35 = (rec).compileID;
-          var $36 = $34($35);
-          var $37 = $$fieldMap$Transferable$$js($$String$Transferable$$$string$$$js);
-          var $38 = (rec).source;
-          var $39 = $37($38);
-          return {compileID:$36, source:$39};
+        var $30 = (this$).nextCompileID;
+        var $31 = ($30+1);
+        (this$).nextCompileID = $31;
+        var $38 = $$record$Transferable$$js((function(rec) {
+          var $32 = $$fieldMap$Transferable$$js($$Number$Transferable$$$number$$$js);
+          var $33 = (rec).compileID;
+          var $34 = $32($33);
+          var $35 = $$fieldMap$Transferable$$js($$String$Transferable$$$string$$$js);
+          var $36 = (rec).source;
+          var $37 = $35($36);
+          return {compileID:$34, source:$37};
         }));
-        var $41 = $dom$worker_postMessage($40);
-        var $42 = (this$).worker;
-        var $43 = $41($42, {compileID:compileID, source:source});
-        var $44 = Compiling({compileID:compileID, source:source, optimize:optimize});
-        (this$).state = $44;
+        var $39 = $dom$worker_postMessage($38);
+        var $40 = (this$).worker;
+        var $41 = $39($40, {compileID:compileID, source:source});
+        var $42 = Compiling({compileID:compileID, source:source, optimize:optimize});
+        (this$).state = $42;
         return (void 0);
       }), COMPILE_DELAY);
-      var $46 = Waiting($45);
-      (this$).state = $46;
+      var $44 = Waiting($43);
+      (this$).state = $44;
       return (void 0);
     }
-    function receiveCompilationResponse($_11, response) {
-      var this$ = $_11[1];
-      var $47 = (this$).state;
-      var $48;
-      if (("Compiling"===$47[0])) {
+    function receiveCompilationResponse($_12, response) {
+      var this$ = $_12[1];
+      var $45 = (this$).state;
+      var $46;
+      if (("Compiling"===$45[0])) {
         {
-          var settings = $47[1];
+          var settings = $45[1];
         }
-        var $49 = $cmp_neq($$Number$Eq$$$number$$$cmp);
-        var $50 = (settings).compileID;
-        var $51 = (response).compileID;
-        var $52 = $49($50, $51);
-        var $53;
-        if ($52) {
+        var $47 = $cmp_neq($$Number$Eq$$$number$$$cmp);
+        var $48 = (settings).compileID;
+        var $49 = (response).compileID;
+        var $50 = $47($48, $49);
+        var $51;
+        if ($50) {
           return (void 0);
         }
         else {
-          $53 = (void 0);
+          $51 = (void 0);
         }
-        var $54 = (settings).source;
-        var $55 = (settings).optimize;
-        var $56 = $tuple_Tuple2($54, $55);
-        $48 = $56;
+        var $52 = (settings).source;
+        var $53 = (settings).optimize;
+        var $54 = $tuple_Tuple2($52, $53);
+        $46 = $54;
       }
       else {
         {
@@ -1199,195 +1564,202 @@ function _rts_new_exception(name, baseException) {
         return (void 0);
       }
       {
-        var source = $48[1];
-        var optimize = $48[2];
+        var source = $46[1];
+        var optimize = $46[2];
       }
-      var $57 = (response).success;
-      var $58;
-      if ($57) {
-        var $59 = $boolean_not(optimize);
-        var $60;
-        if ($59) {
+      var $55 = (response).success;
+      var $56;
+      if ($55) {
+        var $57 = $boolean_not(optimize);
+        var $58;
+        if ($57) {
           (this$).state = Idle;
-          var $61 = LastCompile(source, optimize);
-          var $62 = $option_Some($61);
-          (this$).lastCompile = $62;
-          var $63 = (response).result;
-          var $64 = $result_Ok($63);
-          var $65 = (this$).onresult($64);
+          var $59 = LastCompile(source, optimize);
+          var $60 = $option_Some($59);
+          (this$).lastCompile = $60;
+          var $61 = (response).result;
+          var $62 = $result_Ok($61);
+          var $63 = (this$).onresult($62);
           return (void 0);
         }
         else {
-          var $66 = (response).result;
-          $60 = $66;
+          var $64 = (response).result;
+          $58 = $64;
         }
-        $58 = $60;
+        $56 = $58;
       }
       else {
         (this$).state = Idle;
-        var $67 = LastCompile(source, optimize);
-        var $68 = $option_Some($67);
-        (this$).lastCompile = $68;
-        var $69 = (response).result;
-        var $70 = ("Compile error:\n"+$69);
-        var $71 = $result_Err($70);
-        var $72 = (this$).onresult($71);
+        var $65 = LastCompile(source, optimize);
+        var $66 = $option_Some($65);
+        (this$).lastCompile = $66;
+        var $67 = (response).result;
+        var $68 = ("Compile error:\n"+$67);
+        var $69 = $result_Err($68);
+        var $70 = (this$).onresult($69);
         return (void 0);
       }
       {
-        var result = $58;
+        var result = $56;
       }
-      var $73 = newXmlHttpRequest();
+      var $71 = newXmlHttpRequest();
       {
-        var xhr = $73;
+        var xhr = $71;
       }
-      var $74 = (xhr).open("POST", "https://crux-closure-service.herokuapp.com/compile");
-      var $75 = (xhr).setRequestHeader("content-type", "application/json");
+      var $72 = (xhr).open("POST", "https://crux-closure-service.herokuapp.com/compile");
+      var $73 = (xhr).setRequestHeader("content-type", "application/json");
       (xhr).timeout = 60000;
-      var $76 = toJson({source:result});
-      var $77 = (xhr).send($76);
-      var $78 = Optimizing(xhr);
-      (this$).state = $78;
+      var $77 = $$record$ToJSON$$json((function(rec) {
+        var $74 = $$fieldMap$ToJSON$$json($$String$ToJSON$$$string$$$json);
+        var $75 = (rec).source;
+        var $76 = $74($75);
+        return {source:$76};
+      }));
+      var $78 = $json_encode($77);
+      var $79 = $78({source:result});
+      var $80 = (xhr).send($79);
+      var $81 = Optimizing(xhr);
+      (this$).state = $81;
       (xhr).onload = (function() {
-        var $79 = (xhr).response;
-        var $80 = parseJson($79);
+        var $82 = (xhr).response;
+        var $83 = parseJson($82);
         {
-          var result2 = $80;
+          var result2 = $83;
         }
         (this$).state = Idle;
-        var $81 = LastCompile(source, optimize);
-        var $82 = $option_Some($81);
-        (this$).lastCompile = $82;
-        var $83 = (result2).source;
-        var $84 = $result_Ok($83);
-        var $85 = (this$).onresult($84);
-        return $85;
-      });
-      (xhr).onerror = (function(e) {
-        (this$).lastCompile = $option_None;
-        var $86 = ("Network error:\n"+e);
-        var $87 = $result_Err($86);
+        var $84 = LastCompile(source, optimize);
+        var $85 = $option_Some($84);
+        (this$).lastCompile = $85;
+        var $86 = (result2).source;
+        var $87 = $result_Ok($86);
         var $88 = (this$).onresult($87);
         return $88;
       });
+      (xhr).onerror = (function(e) {
+        (this$).lastCompile = $option_None;
+        var $89 = ("Network error:\n"+e);
+        var $90 = $result_Err($89);
+        var $91 = (this$).onresult($90);
+        return $91;
+      });
       (xhr).ontimeout = (function() {
         (this$).lastCompile = $option_None;
-        var $89 = $result_Err("Network timeout");
-        var $90 = (this$).onresult($89);
-        return $90;
+        var $92 = $result_Err("Network timeout");
+        var $93 = (this$).onresult($92);
+        return $93;
       });
       return (void 0);
     }
     function newCompiler(onresult) {
-      var $91 = $dom$worker_new("compiler-worker.js");
+      var $94 = $dom$worker_new("compiler-worker.js");
       {
-        var compilerThread = $91;
+        var compilerThread = $94;
       }
-      var $92 = Compiler({state:Idle, lastCompile:$option_None, onresult:onresult, nextCompileID:0, worker:compilerThread});
+      var $95 = Compiler({state:Idle, lastCompile:$option_None, onresult:onresult, nextCompileID:0, worker:compilerThread});
       {
-        var compiler = $92;
+        var compiler = $95;
       }
-      var $95 = $dom$worker_setHandler(compilerThread, (function(response) {
-        var $93 = response;
-        var $94 = receiveCompilationResponse(compiler, $93);
-        return $94;
+      var $98 = $dom$worker_setHandler(compilerThread, (function(response) {
+        var $96 = response;
+        var $97 = receiveCompilationResponse(compiler, $96);
+        return $97;
       }));
       return compiler;
     }
     function main() {
-      var $96 = querySelector(".crux-playground .source");
+      var $99 = querySelector(".crux-playground .source");
       {
-        var sourceTextArea = $96;
+        var sourceTextArea = $99;
       }
-      var $97 = querySelector(".crux-playground .output");
+      var $100 = querySelector(".crux-playground .output");
       {
-        var outputTextArea = $97;
+        var outputTextArea = $100;
       }
-      var $98 = querySelector(".crux-playground .optimize");
+      var $101 = querySelector(".crux-playground .optimize");
       {
-        var optimizeCheckbox = $98;
+        var optimizeCheckbox = $101;
       }
-      var $99 = querySelector(".crux-playground .run");
+      var $102 = querySelector(".crux-playground .run");
       {
-        var runButton = $99;
+        var runButton = $102;
       }
       {
         var loadExampleSource = (function() {
-          var $100 = getElementById("initial_example");
-          var $101 = ($100).text;
+          var $103 = getElementById("initial_example");
+          var $104 = ($103).text;
           {
-            var source = $101;
+            var source = $104;
           }
-          var $102 = $string_trim(source);
-          source = $102;
+          var $105 = $string_trim(source);
+          source = $105;
           (sourceTextArea).value = source;
           return (void 0);
         });
       }
-      var $108 = newCompiler((function(result) {
-        var $103;
+      var $111 = newCompiler((function(result) {
+        var $106;
         if (("Ok"===result[0])) {
           {
             var res = result[1];
           }
-          var $104 = (outputTextArea).classList;
-          var $105 = ($104).remove("has-errors");
+          var $107 = (outputTextArea).classList;
+          var $108 = ($107).remove("has-errors");
           (outputTextArea).value = res;
-          $103 = (void 0);
+          $106 = (void 0);
         }
         else {
           if (("Err"===result[0])) {
             {
               var err = result[1];
             }
-            var $106 = (outputTextArea).classList;
-            var $107 = ($106).add("has-errors");
+            var $109 = (outputTextArea).classList;
+            var $110 = ($109).add("has-errors");
             (outputTextArea).value = err;
-            $103 = (void 0);
+            $106 = (void 0);
           }
           else {
           }
         }
-        return $103;
+        return $106;
       }));
       {
-        var compiler = $108;
+        var compiler = $111;
       }
       {
         var recompile = (function() {
-          var $109 = (sourceTextArea).value;
+          var $112 = (sourceTextArea).value;
           {
-            var content = $109;
+            var content = $112;
           }
-          var $110 = (optimizeCheckbox).checked;
+          var $113 = (optimizeCheckbox).checked;
           {
-            var optimize = $110;
+            var optimize = $113;
           }
-          var $111 = compile(compiler, content, optimize);
-          return $111;
+          var $114 = compile(compiler, content, optimize);
+          return $114;
         });
       }
       {
         var registerCompileListener = (function() {
-          var $112 = (sourceTextArea).addEventListener("input", recompile);
-          var $113 = (optimizeCheckbox).addEventListener("change", recompile);
-          return $113;
+          var $115 = (sourceTextArea).addEventListener("input", recompile);
+          var $116 = (optimizeCheckbox).addEventListener("change", recompile);
+          return $116;
         });
       }
-      var $114 = loadExampleSource();
-      var $115 = registerCompileListener();
-      var $116 = recompile();
+      var $117 = loadExampleSource();
+      var $118 = registerCompileListener();
+      var $119 = recompile();
       (sourceTextArea).disabled = $types_False;
-      var $117 = (sourceTextArea).setSelectionRange(0, 0);
-      var $118 = (sourceTextArea).focus();
-      var $120 = (runButton).addEventListener("click", (function() {
-        var $119 = $builtin_print("run button temporarily disabled");
-        return $119;
+      var $120 = (sourceTextArea).setSelectionRange(0, 0);
+      var $121 = (sourceTextArea).focus();
+      var $123 = (runButton).addEventListener("click", (function() {
+        var $122 = $builtin_print("run button temporarily disabled");
+        return $122;
       }));
-      return $120;
+      return $123;
     }
-    var $121 = main();
-    var $122 = main();
+    var $124 = main();
+    var $125 = main();
     $$LastCompile$Eq$$$main$$$cmp = $$LastCompile$Eq$$$main$$$cmp;
   })();
 })();
