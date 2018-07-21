@@ -16,7 +16,8 @@ layer for Emscripten.  Chad is now at Dropbox working on web and native applicat
 
 ## Andy
 
-Andy is a lead at IMVU.  He led IMVU's adoption of Haskell and built much of the key infrastructure, including
-the server-side renderer.  Andy kick-started the Crux project with the initial parser and type checker.
+Andy is a Principal Software Engineer at Roblox and a former lead at IMVU.  He led IMVU's adoption of Haskell and built much
+of the key infrastructure, including the server-side renderer.  Andy kick-started the Crux project with the initial parser and
+type checker.
 
 [http://andyfriesen.com/](http://andyfriesen.com)
